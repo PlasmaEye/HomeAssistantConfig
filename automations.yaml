@@ -1,0 +1,19 @@
+- alias: "Turn on porch light when it's dark outside"
+  trigger: 
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: "{{ state.attributes.elevation }}"
+    below: -4.0
+  action:
+    service: switch.turn_on
+    entity_id: switch.switch
+
+- alias: "Turn off porch light when it's light outside"
+  trigger:
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: "{{ state.attributes.elevation }}"
+    above: -4.0
+  action:
+    service: switch.turn_off
+    entity_id: switch.switch

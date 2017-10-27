@@ -1,0 +1,8 @@
+zwave._:
+  is_zwave_plus: true
+switch.switch:
+  friendly_name: Front Porch Light Switch
+zwave.front_door_south_switch:
+  node_name: Front Door South
+switch.front_door_south_switch_switch:
+  friendly_name: Front Door South Switch
