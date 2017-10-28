@@ -82,7 +82,7 @@ nest:
 media_player:
   - platform: plex
   - platform: webostv
-    host: 192.168.1.15
+    host: !secret tv_ip_address 
     name: Home Theater TV
     turn_on_action:
       service: wake_on_lan.send_magic_packet
@@ -91,7 +91,7 @@ media_player:
 
 device_tracker:
   - platform: tomato
-    host: 192.168.1.1
+    host: !secret router_ip_address
     username: !secret router_username
     password: !secret router_password
     http_id: !secret router_http_id
