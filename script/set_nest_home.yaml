@@ -1,5 +1,4 @@
 set_nest_home:
-  hidden: true
   sequence:
     - service: nest.set_mode
       data:
