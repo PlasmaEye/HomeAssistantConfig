@@ -24,6 +24,8 @@ http:
   api_password: !secret http_password
   server_port: 8123
   base_url: hassio.local
+  trusted_networks:
+    - 192.168.1.0/24
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   # base_url: example.duckdns.org:8123
 
