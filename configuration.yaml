@@ -53,7 +53,15 @@ sun:
 
 # Weather prediction
 sensor:
-  - platform: yr
+  - platform: darksky
+    api_key: !secret dark_sky_key
+    monitored_conditions:
+      - summary
+      - icon
+      - temperature
+      - daily_summary
+      - temperature_max
+      - temperature_min
 
 # Text to speech
 tts:
