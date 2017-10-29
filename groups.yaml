@@ -8,6 +8,13 @@ default_view:
     - group.weather
     - group.switches
 
+automations:
+  view: yes
+  icon: mdi:robot
+  name: Automations
+  entities:
+    - group.all_automations
+
 devices:
   name: Devices
   view: no

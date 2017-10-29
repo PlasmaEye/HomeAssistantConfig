@@ -4,3 +4,6 @@ zwave.aeotec_dsc26103_micro_switch_2nd_edition:
   node_name: Front Door South
 switch.aeotec_dsc26103_micro_switch_2nd_edition_switch:
   friendly_name: Front Door South Switch
+group.all_automations:
+  hidden: false
+  friendly_name: All Automations
