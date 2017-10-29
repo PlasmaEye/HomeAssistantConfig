@@ -65,14 +65,10 @@ media_player:
         mac: !secret tv_mac_address
 
 device_tracker:
-  - platform: snmp
-    host: !secret router_ip_address
-    community: rocommunity
-    baseoid: 1.3.6.1.2.1.4.22.1.2
-  - platform: nmap_tracker
-    hosts: 192.168.1.1/24
-    exclude: 
-      - 192.168.1.4
+  - platform: ping
+    hosts:
+      pixel_xl: 192.168.1.12
+      moto_z_play: 192.168.1.14
 
 group: !include groups.yaml
 automation: !include automations.yaml
