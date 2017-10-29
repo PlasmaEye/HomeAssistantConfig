@@ -1,8 +1,6 @@
-zwave._:
-  is_zwave_plus: true
 switch.switch:
   friendly_name: Front Porch Light Switch
-zwave.front_door_south_switch:
+zwave.aeotec_dsc26103_micro_switch_2nd_edition:
   node_name: Front Door South
-switch.front_door_south_switch_switch:
+switch.aeotec_dsc26103_micro_switch_2nd_edition_switch:
   friendly_name: Front Door South Switch

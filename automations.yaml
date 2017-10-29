@@ -6,7 +6,7 @@
     below: -4.0
   action:
     service: switch.turn_on
-    entity_id: switch.switch
+    entity_id: switch.aeotec_dsc26103_micro_switch_2nd_edition_switch
 
 - alias: "Turn off porch light when it's light outside"
   trigger:
@@ -16,4 +16,4 @@
     above: -4.0
   action:
     service: switch.turn_off
-    entity_id: switch.switch
+    entity_id: switch.aeotec_dsc26103_micro_switch_2nd_edition_switch
