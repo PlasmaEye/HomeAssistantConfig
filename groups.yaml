@@ -1,0 +1,18 @@
+group:
+  default_view:
+    view: yes
+    icon: mdi:home
+    entities:
+      - group.nomadic_devices
+      - group.climate
+
+  nomadic_devices:
+    name: Nomadic Devices
+    view: no
+
+  climate:
+    name: Climate
+    view: no
+    entities:
+      - sensor.living_room_thermostat_temperature
+      - sensor.living_room_thermostat_humidity
