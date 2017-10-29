@@ -69,6 +69,10 @@ device_tracker:
     host: !secret router_ip_address
     community: rocommunity
     baseoid: 1.3.6.1.2.1.4.22.1.2
+  - platform: nmap_tracker
+    hosts: 192.168.1.1/24
+    exclude: 
+      - 192.168.1.4
 
 group: !include groups.yaml
 automation: !include automations.yaml
