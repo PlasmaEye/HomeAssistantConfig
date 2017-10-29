@@ -2,12 +2,17 @@ default_view:
   view: yes
   icon: mdi:home
   entities:
-    - group.nomadic_devices
+    - group.devices
     - group.climate
+    - group.media_players
+    - group.weather
 
-nomadic_devices:
-  name: Nomadic Devices
+devices:
+  name: Devices
   view: no
+  entities:
+    - device_tracker.pixel_xl
+    - device_tracker.moto_z_play
 
 climate:
   name: Climate
@@ -15,3 +20,20 @@ climate:
   entities:
     - sensor.living_room_thermostat_temperature
     - sensor.living_room_thermostat_humidity
+    - binary_sensor.living_room_thermostat_fan    
+
+media_players:
+  name: Media Players
+  view: no
+  entities:
+    - media_player.home_theater_tv
+    - media_player.living_room_audio
+
+weather:
+  name: Weather
+  view: no
+  entities:
+    - sensor.dark_sky_daily_high_temperature
+    - sensor.dark_sky_daily_low_temperature
+    - sensor.dark_sky_daily_summary
+    - sensor.dark_sky_temperature
