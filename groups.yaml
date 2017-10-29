@@ -37,3 +37,9 @@ weather:
     - sensor.dark_sky_daily_low_temperature
     - sensor.dark_sky_daily_summary
     - sensor.dark_sky_temperature
+
+switches:
+  name: Switches
+  view: no
+  entities:
+    - switch.aeotec_dsc26103_micro_switch_2nd_edition_switch
