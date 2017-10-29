@@ -17,3 +17,27 @@
   action:
     service: switch.turn_off
     entity_id: switch.aeotec_dsc26103_micro_switch_2nd_edition_switch
+
+- alias: "Turn on Nest Away Mode when the phones are outside the network"
+  trigger:
+    platform: state
+    entity_id: group.devices
+    from: 'home'
+    to: 'not_home'
+    for:
+      minutes: 30
+  action:
+    - service: nest.set_mode
+      data:
+        home_mode: away
+
+- alias: "Turn off Nest Away Mode when a phone is inside the network"
+  trigger: 
+    platform: state
+    entity_id: group.devices
+    from: 'not_home'
+    to: 'home'
+  action:
+    - service: nest.set_mode
+      data:
+        home_mode: home
