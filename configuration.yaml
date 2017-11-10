@@ -58,17 +58,17 @@ device_tracker:
   - platform: ping
     count: 5
     hosts:
-      pixel_xl: 192.168.1.12
-      moto_z_play: 192.168.1.14
-      cable_modem: 192.168.100.1
+      pixel_xl: !secret andrews_phone_ip_address
+      moto_z_play: !secret marias_phone_ip_address
+      cable_modem: !secret modem_ip_address
   - platform: nmap_tracker
     track_new_devices: false
     hosts: 
       - 192.168.1.1/24
     exclude:
-      - 192.168.1.4
-      - 192.168.1.12
-      - 192.168.1.14
+      - !secret hassio_ip_address
+      - !secret andrews_phone_ip_address
+      - !secret marias_phone_ip_address
 
 group: !include groups.yaml
 automation: !include automations.yaml
