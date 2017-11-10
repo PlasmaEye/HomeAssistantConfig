@@ -1,0 +1,1 @@
+Copy-Item -Path "\\hassio\config\known_devices.yaml"
