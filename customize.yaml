@@ -7,3 +7,18 @@ switch.aeotec_dsc26103_micro_switch_2nd_edition_switch:
 group.all_automations:
   hidden: false
   friendly_name: All Automations
+sensor.dark_sky_daily_high_temperature:
+  friendly_name: Today's High Temp
+sensor.dark_sky_daily_low_temperature:
+  friendly_name: Today's Low Temp
+sensor.dark_sky_temperature:
+  friendly_name: Current Temp
+sensor.dark_sky_summary:
+  friendly_name: Current Conditions
+group.all_devices:
+  hidden: false
+  friendly_name: All Devices
+sensor.living_room_thermostat_humidity:
+  friendly_name: Indoor Humidity
+sensor.living_room_thermostat_hvac_state:
+  friendly_name: HVAC State
