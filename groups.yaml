@@ -22,11 +22,20 @@ devices:
     - device_tracker.pixel_xl
     - device_tracker.moto_z_play
 
+current_network:
+  name: All Devices Currently On Network
+  view: yes
+  icon: mdi:lan
+  entities:
+    - group.all_devices
+
 climate:
   name: Climate
   view: no
   entities:
     - climate.living_room
+    - sensor.living_room_thermostat_humidity
+    - sensor.living_room_thermostat_hvac_state
 
 media_players:
   name: Media Players
