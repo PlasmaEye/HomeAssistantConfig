@@ -29,16 +29,6 @@ logbook:
 
 sun:
 
-sensor:
-  - platform: darksky
-    api_key: !secret dark_sky_key
-    monitored_conditions:
-      - summary
-      - temperature
-      - daily_summary
-      - temperature_max
-      - temperature_min
-
 tts:
   - platform: google
 
@@ -66,10 +56,21 @@ media_player:
 
 device_tracker:
   - platform: ping
+    count: 5
     hosts:
       pixel_xl: 192.168.1.12
       moto_z_play: 192.168.1.14
+      cable_modem: 192.168.100.1
+  - platform: nmap_tracker
+    track_new_devices: false
+    hosts: 
+      - 192.168.1.1/24
+    exclude:
+      - 192.168.1.4
+      - 192.168.1.12
+      - 192.168.1.14
 
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include_dir_merge_named script
+sensor: !include sensors.yaml
