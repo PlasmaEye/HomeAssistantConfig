@@ -22,3 +22,13 @@ sensor.living_room_thermostat_humidity:
   friendly_name: Indoor Humidity
 sensor.living_room_thermostat_hvac_state:
   friendly_name: HVAC State
+sensor.pihole_ads_percentage_blocked_today:
+  friendly_name: Ad Traffic Percentage
+sensor.pihole_dns_queries_today:
+  friendly_name: DNS Queries Today
+sensor.speedtest_download:
+  friendly_name: Download Rate
+sensor.speedtest_upload:
+  friendly_name: Upload Rate
+sensor.speedtest_ping:
+  friendly_name: Ping

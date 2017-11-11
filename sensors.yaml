@@ -6,3 +6,16 @@
     - daily_summary
     - temperature_max
     - temperature_min
+
+- platform: pi_hole
+  host: !secret pihole_ip_address
+  monitored_conditions:
+    - ads_percentage_today
+    - dns_queries_today
+
+- platform: speedtest
+  server_id: 10143
+  monitored_conditions:
+    - ping
+    - download
+    - upload

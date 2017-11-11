@@ -23,11 +23,22 @@ devices:
     - device_tracker.moto_z_play
 
 current_network:
-  name: All Devices Currently On Network
+  name: Current Network Status
   view: yes
   icon: mdi:lan
   entities:
     - group.all_devices
+    - group.internet_status
+
+internet_status:
+  name: Internet Status
+  view: no
+  entities:
+    - sensor.pihole_ads_percentage_blocked_today
+    - sensor.pihole_dns_queries_today
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
 
 climate:
   name: Climate
