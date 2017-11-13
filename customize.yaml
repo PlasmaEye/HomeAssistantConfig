@@ -1,9 +1,15 @@
-switch.switch:
-  friendly_name: Front Porch Light Switch
-zwave.aeotec_dsc26103_micro_switch_2nd_edition:
+zwave.front_door_south:
   node_name: Front Door South
-switch.aeotec_dsc26103_micro_switch_2nd_edition_switch:
+switch.front_door_south_switch:
   friendly_name: Front Door South Switch
+zwave.dining_room_east:
+  friendly_name: Dining Room East
+switch.dining_room_east_switch:
+  friendly_name: Dining Room Switch
+zwave.kitchen_south:
+  friendly_name: Kitchen South
+switch.kitchen_south_switch:
+  friendly_name: Kitchen South Switch
 group.all_automations:
   hidden: false
   friendly_name: All Automations
@@ -18,6 +24,12 @@ sensor.dark_sky_summary:
 group.all_devices:
   hidden: false
   friendly_name: All Devices
+group.all_lights:
+  hidden: false
+  friendly_name: All Lights
+group.all_switches:
+  hidden: false
+  friendly_name: All Switches
 sensor.living_room_thermostat_humidity:
   friendly_name: Indoor Humidity
 sensor.living_room_thermostat_hvac_state:
