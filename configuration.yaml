@@ -73,7 +73,7 @@ device_tracker:
 light:
   - platform: flux_led
     devices:
-      !secret kitchen_light_controller_ip_address:
+      192.168.1.50:
         name: Kitchen Light Controller
 
 group: !include groups.yaml
