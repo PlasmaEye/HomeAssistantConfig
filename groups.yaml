@@ -6,7 +6,8 @@ default_view:
     - group.climate
     - group.media_players
     - group.weather
-    - group.switches
+    - group.all_switches
+    - group.all_lights
 
 automations:
   view: yes
@@ -63,9 +64,3 @@ weather:
     - sensor.dark_sky_daily_low_temperature
     - sensor.dark_sky_temperature
     - sensor.dark_sky_summary    
-
-switches:
-  name: Switches
-  view: no
-  entities:
-    - switch.aeotec_dsc26103_micro_switch_2nd_edition_switch
