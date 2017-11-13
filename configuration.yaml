@@ -70,6 +70,12 @@ device_tracker:
       - !secret andrews_phone_ip_address
       - !secret marias_phone_ip_address
 
+light:
+  - platform: flux_led
+    devices:
+      !secret kitchen_light_controller_ip_address:
+        name: Kitchen Light Controller
+
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include_dir_merge_named script
