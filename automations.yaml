@@ -61,3 +61,23 @@
     service: nest.set_mode
     data:
       home_mode: home
+
+- alias: "Switch Kitchen Under Cabinet Lights On"
+  trigger:
+    platform: state
+    entity_id: switch.kitchen_south_switch
+    to: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: kitchen_light_controller
+
+- alias: "Switch Kitchen Under Cabinet Lights Off"
+  trigger:
+    platform: state
+    entity_id: switch.kitchen_south_switch
+    to: 'off'
+  action:
+    service: light.turn_off
+    data:
+      entity_id: kitchen_light_controller
