@@ -1,5 +1,6 @@
 homeassistant:
   name: Home
+
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: !secret home_elevation
@@ -8,6 +9,7 @@ homeassistant:
   customize: !include customize.yaml
 
 frontend:
+  javascript_version: latest
 
 config:
 
@@ -40,10 +42,6 @@ wake_on_lan:
 zwave:
   usb_path: /dev/ttyACM0
 
-nest:
-  client_id: !secret nest_client_id
-  client_secret: !secret nest_client_secret
-
 media_player:
   - platform: plex
   - platform: webostv
@@ -63,18 +61,32 @@ device_tracker:
       cable_modem: !secret modem_ip_address
   - platform: nmap_tracker
     track_new_devices: false
+    home_interval: 10
     hosts: 
       - 192.168.1.1/24
     exclude:
       - !secret hassio_ip_address
       - !secret andrews_phone_ip_address
       - !secret marias_phone_ip_address
+      - !secret kitchen_light_controller_ip_address
 
 light:
   - platform: flux_led
+    automatic_add: false
     devices:
       192.168.1.50:
         name: Kitchen Light Controller
+        protocol: 'ledenet'
+        mode: 'rgbw'
+
+switch:
+  - platform: flux
+    lights:
+      - light.kitchen_light_controller
+    name: Fluxer
+    start_time: '7:00'
+    stop_time: '20:00'
+    brightness: 255
 
 group: !include groups.yaml
 automation: !include automations.yaml

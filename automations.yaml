@@ -25,42 +25,14 @@
     from: 'home'
     to: 'not_home'
     for:
-      minutes: 30
+      minutes: 45
   action:
-    - service: nest.set_mode
-      data:
-        home_mode: away
     - service: media_player.turn_off
       data:
         entity_id: media_player.home_theater_tv
     - service: media_player.turn_off
       data:
         entity_id: media_player.living_room_audio
-
-- alias: "Turn Away Mode Off When Home"
-  trigger: 
-    platform: state
-    entity_id: group.devices
-    from: 'not_home'
-    to: 'home'
-  action:
-    - service: nest.set_mode
-      data:
-        home_mode: home
-
-- alias: "Reset Nest Away Mode If We're Home"
-  trigger:
-    platform: state
-    entity_id: sensor.living_room_thermostat_operation_mode
-    to: 'eco'
-  condition:
-    condition: state
-    entity_id: group.devices
-    state: 'home'
-  action:
-    service: nest.set_mode
-    data:
-      home_mode: home
 
 - alias: "Switch Kitchen Under Cabinet Lights On"
   trigger:

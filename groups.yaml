@@ -3,7 +3,6 @@ default_view:
   icon: mdi:home
   entities:
     - group.devices
-    - group.climate
     - group.media_players
     - group.weather
     - group.all_switches
@@ -40,14 +39,6 @@ internet_status:
     - sensor.speedtest_download
     - sensor.speedtest_upload
     - sensor.speedtest_ping
-
-climate:
-  name: Climate
-  view: no
-  entities:
-    - climate.living_room
-    - sensor.living_room_thermostat_humidity
-    - sensor.living_room_thermostat_hvac_state
 
 media_players:
   name: Media Players
