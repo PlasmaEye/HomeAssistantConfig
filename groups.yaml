@@ -46,6 +46,7 @@ media_players:
   entities:
     - media_player.home_theater_tv
     - media_player.living_room_audio
+    - media_player.gpm_desktop_player
 
 weather:
   name: Weather

@@ -51,6 +51,8 @@ media_player:
       service: wake_on_lan.send_magic_packet
       data:
         mac: !secret tv_mac_address
+  - platform: gpmdp
+    host: !secret prometheus_ip_address
 
 device_tracker:
   - platform: ping
@@ -78,15 +80,6 @@ light:
         name: Kitchen Light Controller
         protocol: 'ledenet'
         mode: 'rgbw'
-
-switch:
-  - platform: flux
-    lights:
-      - light.kitchen_light_controller
-    name: Fluxer
-    start_time: '7:00'
-    stop_time: '20:00'
-    brightness: 255
 
 group: !include groups.yaml
 automation: !include automations.yaml
