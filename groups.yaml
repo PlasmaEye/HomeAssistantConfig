@@ -2,7 +2,6 @@ default_view:
   view: yes
   icon: mdi:home
   entities:
-    - group.devices
     - group.media_players
     - group.weather
     - group.all_switches
@@ -27,6 +26,7 @@ current_network:
   view: yes
   icon: mdi:lan
   entities:
+    - group.devices
     - group.all_devices
     - group.internet_status
 
