@@ -2,6 +2,7 @@ default_view:
   view: yes
   icon: mdi:home
   entities:
+    - remote.harmony_hub
     - group.media_players
     - group.weather
     - group.all_switches

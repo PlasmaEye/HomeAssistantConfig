@@ -19,3 +19,9 @@
     - ping
     - download
     - upload
+
+- platform: template
+  sensors:
+    harmony_hub:
+      value_template: '{{ states.remote.harmony_hub.attributes.current_activity }}'
+      friendly_name: 'Home Theater'      
