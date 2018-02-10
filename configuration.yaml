@@ -81,6 +81,11 @@ light:
         protocol: 'ledenet'
         mode: 'rgbw'
 
+remote:
+  - platform: harmony
+    name: Harmony Hub
+    host: !secret harmony_hub_ip_address
+
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include_dir_merge_named script

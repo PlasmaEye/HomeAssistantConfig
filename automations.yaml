@@ -18,22 +18,6 @@
     service: switch.turn_off
     entity_id: switch.front_door_south_switch
 
-- alias: "Turn Away Mode On When Away"
-  trigger:
-    platform: state
-    entity_id: group.devices
-    from: 'home'
-    to: 'not_home'
-    for:
-      minutes: 45
-  action:
-    - service: media_player.turn_off
-      data:
-        entity_id: media_player.home_theater_tv
-    - service: media_player.turn_off
-      data:
-        entity_id: media_player.living_room_audio
-
 - alias: "Switch Kitchen Under Cabinet Lights On"
   trigger:
     platform: state
@@ -53,3 +37,38 @@
     service: light.turn_off
     entity_id: 
       - light.kitchen_light_controller
+
+- alias: "Dim lights for movies"
+  trigger:
+    - platform: state
+      entity_id: sensor.harmony_hub
+      to: 'Watch Netflix/Hulu/Plex/Amazon'
+    - platform: state
+      entity_id: sensor.harmony_hub
+      to: 'Watch a Movie'
+  condition:
+    condition: state
+    entity_id: light.home_theater_west_dimmer
+    state: 'on'
+  action:
+    service: light.turn_on
+    entity_id: light.home_theater_west_dimmer
+    data:
+      brightness_pct: 10
+      transition: 5
+
+- alias: "Brighten lights when done watching TV"
+  trigger:
+    - platform: state
+      entity_id: sensor.harmony_hub
+      to: 'PowerOff'
+  condition:
+    condition: state
+    entity_id: light.home_theater_west_dimmer
+    state: 'on'
+  action:
+    service: light.turn_on
+    entity_id: light.home_theater_west_dimmer
+    data:
+      brightness_pct: 100
+      transition: 5
