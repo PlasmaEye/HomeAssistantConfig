@@ -4,6 +4,7 @@ default_view:
   entities:
     - remote.harmony_hub
     - group.media_players
+    - camera.ip_webcam
     - group.weather
     - group.all_switches
     - group.all_lights
