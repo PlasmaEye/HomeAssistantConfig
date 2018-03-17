@@ -52,6 +52,7 @@ android_ip_webcam:
       - light
       - motion
       - pressure
+      - sound
     switches:
       - exposure_lock
       - ffc
