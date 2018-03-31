@@ -18,7 +18,8 @@ http:
   server_port: 8123
   base_url: hassio.local
   trusted_networks:
-    - 192.168.1.0/24
+    - !secret local_network
+    - !secret vpn_network
 
 updater:
   include_used_components: true
