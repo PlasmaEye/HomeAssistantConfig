@@ -78,22 +78,11 @@ media_player:
     host: !secret prometheus_ip_address
 
 device_tracker:
-  - platform: ping
-    count: 5
-    hosts:
-      pixel_xl: !secret andrews_phone_ip_address
-      moto_z_play: !secret marias_phone_ip_address
-      cable_modem: !secret modem_ip_address
-  - platform: nmap_tracker
-    track_new_devices: false
-    home_interval: 10
-    hosts: 
-      - 192.168.1.1/24
-    exclude:
-      - !secret hassio_ip_address
-      - !secret andrews_phone_ip_address
-      - !secret marias_phone_ip_address
-      - !secret kitchen_light_controller_ip_address
+  - platform: unifi
+    host: !secret pihole_ip_address
+    username: !secret unifi_username
+    password: !secret unifi_password
+    verify_ssl: false
 
 light:
   - platform: flux_led
