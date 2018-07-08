@@ -1,9 +1,8 @@
 - platform: darksky
   api_key: !secret dark_sky_key
   monitored_conditions:
-    - apparent_temperature
-    - apparent_temperature_min
-    - apparent_temperature_max
+    - apparent_temperature_low
+    - apparent_temperature_high
 
 - platform: pi_hole
   host: !secret pihole_ip_address
