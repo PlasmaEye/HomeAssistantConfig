@@ -44,3 +44,5 @@ sensor.speedtest_upload:
   friendly_name: Upload Rate
 sensor.speedtest_ping:
   friendly_name: Ping
+switch.aeotec_dsc26103_micro_switch_2nd_edition_switch:
+  friendly_name: Kitchen Sink South Switch

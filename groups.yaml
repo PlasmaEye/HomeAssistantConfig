@@ -48,6 +48,7 @@ switches:
     - switch.dining_room_east_switch
     - switch.front_door_south_switch
     - switch.kitchen_south_switch
+    - switch.kitchen_sink_south_switch
 
 devices:
   name: Devices
