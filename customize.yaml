@@ -46,3 +46,10 @@ sensor.speedtest_ping:
   friendly_name: Ping
 switch.aeotec_dsc26103_micro_switch_2nd_edition_switch:
   friendly_name: Kitchen Sink South Switch
+binary_sensor.vision_zg8101_garage_door_detector_sensor:
+  friendly_name: Garage Door
+  device_class: garage_door
+sensor.garage_door:
+  icon: mdi:garage
+sensor.garage_door_sensor_battery_level:
+  icon: mdi:battery

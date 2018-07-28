@@ -1,0 +1,47 @@
+title: Home
+# Exclude entites from "Unused entities" view
+excluded_entities:  
+views:
+    # View tab title.
+  - icon: mdi:home
+    # Optional unique id for direct access /lovelace/${id}
+    id: example
+    # Each view can have a different theme applied.
+    theme: dark-mode
+    # The cards to show on this view.
+    cards:
+      - type: weather-forecast
+        entity: weather.dark_sky
+        # The filter card will filter entities for their state
+      - type: entities
+        title: Switches
+        entities:
+          - switch.dining_room_east_switch
+          - switch.front_door_south_switch
+          - switch.kitchen_south_switch
+          - switch.kitchen_sink_south_switch
+          - light.home_theater_west_dimmer
+
+    # Specify a tab icon if you want the view tab to be an icon.
+  - icon: mdi:home-assistant
+    # Title of the view. Will be used as the tooltip for tab icon
+    title: Second view
+    cards:
+        # Entities card will take list of entities and show their state.
+      - type: entities
+        # Title of the entities card
+        title: Example
+        # The entities here will be shown in the same order as specified.
+        # Each entriy is an entity ID or a map with extra options.
+        entities:
+          - light.kitchen
+          - switch.ac
+          - entity: light.living_room
+            # Override the name to use
+            name: LR Lights
+
+        # The markdown card will render markdown text.
+      - type: markdown
+        title: Lovelace
+        content: >
+          Welcome to your **Lovelace UI**.

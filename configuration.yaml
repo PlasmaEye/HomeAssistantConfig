@@ -30,6 +30,8 @@ history:
 
 logbook:
 
+recorder:
+
 sun:
 
 tts:
@@ -39,6 +41,10 @@ mqtt:
   broker: core-mosquitto
 
 wake_on_lan:
+
+weather:
+  - platform: darksky
+    api_key: !secret dark_sky_key
 
 zwave:
   usb_path: /dev/ttyACM0

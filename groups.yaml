@@ -5,6 +5,7 @@ default_view:
     - group.weather
     - group.switches
     - group.all_lights
+    - group.garage
 
 media_players:
   name: Media Players
@@ -49,6 +50,13 @@ switches:
     - switch.front_door_south_switch
     - switch.kitchen_south_switch
     - switch.kitchen_sink_south_switch
+
+garage:
+  name: Garage
+  view: no
+  entities:
+    - sensor.garage_door
+    - sensor.garage_door_sensor_battery_level
 
 devices:
   name: Devices
