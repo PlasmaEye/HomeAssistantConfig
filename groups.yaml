@@ -17,15 +17,6 @@ media_players:
     - media_player.gpm_desktop_player
     - remote.harmony_hub
 
-nursery:
-  name: nursery
-  view: yes
-  icon: mdi:baby
-  entities:
-    - camera.ip_webcam
-    - sensor.ip_webcam_battery_level
-    - sensor.ip_webcam_sound
-
 automations:
   view: yes
   icon: mdi:robot

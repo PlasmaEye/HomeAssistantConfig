@@ -49,28 +49,6 @@ weather:
 zwave:
   usb_path: /dev/ttyACM0
 
-android_ip_webcam:
-  - host: !secret nexus_5_camera_ip_address
-    sensors:
-      - audio_connections
-      - battery_level
-      - battery_temp
-      - battery_voltage
-      - light
-      - motion
-      - pressure
-      - sound
-    switches:
-      - exposure_lock
-      - ffc
-      - focus
-      - gps_active
-      - night_vision
-      - overlay
-      - torch
-      - whitebalance_lock
-      - video_recording
-
 media_player:
   - platform: plex
   - platform: webostv
