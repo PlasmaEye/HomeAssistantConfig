@@ -63,7 +63,7 @@ media_player:
 
 device_tracker:
   - platform: unifi
-    host: !secret pihole_ip_address
+    host: !secret unifi_ip_address
     username: !secret unifi_username
     password: !secret unifi_password
     verify_ssl: false
@@ -75,7 +75,14 @@ light:
       192.168.1.50:
         name: Kitchen Light Controller
         protocol: 'ledenet'
-        mode: 'rgbw'
+        mode: 'rgb'
+
+switch:
+  - platform: flux
+    lights:
+      - light.kitchen_light_controller
+    mode: rgb
+    start_colortemp: 15000
 
 remote:
   - platform: harmony
