@@ -77,12 +77,7 @@ light:
         protocol: 'ledenet'
         mode: 'rgb'
 
-switch:
-  - platform: flux
-    lights:
-      - light.kitchen_light_controller
-    mode: rgb
-    start_colortemp: 15000
+switch: !include switches.yaml  
 
 remote:
   - platform: harmony
