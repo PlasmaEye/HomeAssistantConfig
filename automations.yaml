@@ -72,15 +72,3 @@
     data:
       brightness_pct: 100
       transition: 5
-
-- alias: "Notify when Nursery Cam sound surpasses 200"
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.ip_webcam_sound
-      above: 200
-  action:
-    service: mqtt.publish
-    data:
-      topic: '/homeassistant/ipwebcam'
-      payload: 'Nursery Cam sound surpassed 200'
-
