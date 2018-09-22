@@ -18,10 +18,11 @@ views:
           - switch.flux
       - type: entities
         title: Garage
-        show_header_toggle: true
+        show_header_toggle: false
         entities:
           - sensor.garage_door_sensor_battery_level
           - sensor.garage_door
+          - switch.garage_sconces_switch
       - type: entities
         title: All Lights
         show_header_toggle: true
@@ -53,8 +54,8 @@ views:
         show_header_toggle: true
         entities:
           - automation.switch_kitchen_under_cabinet_lights_off
-          - automation.porch_light_on_when_dark
-          - automation.porch_light_off_when_light
+          - automation.outdoor_lights_on_when_dark
+          - automation.outdoor_lights_off_when_light
           - automation.dim_lights_for_movies
           - automation.switch_kitchen_under_cabinet_lights_on
           - automation.brighten_lights_when_done_watching_tv

@@ -1,4 +1,4 @@
-- alias: "Porch Light On When Dark"
+- alias: "Outdoor Lights On When Dark"
   trigger: 
     platform: numeric_state
     entity_id: sun.sun
@@ -6,9 +6,11 @@
     below: -4.0
   action:
     service: switch.turn_on
-    entity_id: switch.front_door_south_switch
+    entity_id: 
+      - switch.front_door_south_switch
+      - switch.garage_sconces_switch
 
-- alias: "Porch Light Off When Light"
+- alias: "Outdoor Lights Off When Light"
   trigger:
     platform: numeric_state
     entity_id: sun.sun
@@ -16,7 +18,9 @@
     above: -4.0
   action:
     service: switch.turn_off
-    entity_id: switch.front_door_south_switch
+    entity_id: 
+      - switch.front_door_south_switch
+      - switch.garage_sconces_switch
 
 - alias: "Switch Kitchen Under Cabinet Lights On"
   trigger:
