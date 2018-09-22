@@ -10,6 +10,15 @@
       - switch.front_door_south_switch
       - switch.garage_sconces_switch
 
+- alias: "Garage Sconces Off At Midnight"
+  trigger:
+    platform: time
+    at: '00:00:00'
+  action:
+    service: light.turn_off
+    entity_id:
+      - switch.garage_sconces_switch
+
 - alias: "Outdoor Lights Off When Light"
   trigger:
     platform: numeric_state
