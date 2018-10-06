@@ -9,7 +9,6 @@ homeassistant:
   customize: !include customize.yaml
 
 frontend:
-  javascript_version: latest
 
 config:
 
