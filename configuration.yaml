@@ -80,6 +80,7 @@ camera:
   - platform: uvc
     nvr: !secret atlas_ip_address
     key: !secret unifi_video_api_key
+    password: !secret unifi_video_camera_password
 
 switch: !include switches.yaml  
 
