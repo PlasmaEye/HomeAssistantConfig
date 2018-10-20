@@ -5,7 +5,7 @@
     - apparent_temperature_high
 
 - platform: pi_hole
-  host: !secret pihole_ip_address
+  host: !secret atlas_ip_address
   monitored_conditions:
     - ads_percentage_today
     - dns_queries_today

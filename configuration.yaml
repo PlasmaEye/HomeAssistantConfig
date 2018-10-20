@@ -62,7 +62,7 @@ media_player:
 
 device_tracker:
   - platform: unifi
-    host: !secret unifi_ip_address
+    host: !secret atlas_ip_address
     username: !secret unifi_username
     password: !secret unifi_password
     verify_ssl: false
@@ -75,6 +75,11 @@ light:
         name: Kitchen Light Controller
         protocol: 'ledenet'
         mode: 'rgb'
+
+camera:
+  - platform: uvc
+    nvr: !secret atlas_ip_address
+    key: !secret unifi_video_api_key
 
 switch: !include switches.yaml  
 
