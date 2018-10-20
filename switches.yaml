@@ -7,7 +7,7 @@
 - platform: template
   switches:
     watch_netflix_amazon:
-      value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'Watch Neflix/Hulu/Plex/Amazon') }}"
+      value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'Watch Netflix/Hulu/Plex/Amazon') }}"
       turn_on:
         service: remote.turn_on
         entity_id: remote.harmony_hub 
