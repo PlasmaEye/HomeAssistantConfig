@@ -29,14 +29,19 @@ views:
         entities:
           - light.kitchen_light_controller
           - light.home_theater_west_dimmer
+  - title: Cameras
+    icon: mdi:cctv
+    cards:
+      - type: picture-entity
+        entity: camera.uvc_g3_flex
   - title: Media Players
     icon: mdi:play-pause
     cards:
       - type: entities
         entities:
+          - remote.harmony_hub
           - switch.watch_tv
           - switch.play_switch
-          - remote.harmony_hub
           - switch.watch_a_movie
           - switch.watch_netflix_amazon
           - switch.play_steam_link
