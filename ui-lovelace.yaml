@@ -40,11 +40,16 @@ views:
       - type: entities
         entities:
           - remote.harmony_hub
-          - switch.watch_tv
-          - switch.play_switch
-          - switch.watch_a_movie
-          - switch.watch_netflix_amazon
-          - switch.play_steam_link
+          - entity: switch.watch_tv
+            icon: mdi:television
+          - entity: switch.play_switch
+            icon: mdi:nintendo-switch
+          - entity: switch.watch_a_movie
+            icon: mdi:disc
+          - entity: switch.watch_netflix_amazon
+            icon: mdi:netflix            
+          - entity: switch.play_steam_link
+            icon: mdi:steam
       - type: media-control
         entity: media_player.living_room_audio
       - type: media-control
