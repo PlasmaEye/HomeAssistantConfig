@@ -34,6 +34,8 @@ views:
     cards:
       - type: picture-entity
         entity: camera.uvc_g3_flex
+      - type: picture-entity
+        entity: camera.garage
   - title: Media Players
     icon: mdi:play-pause
     cards:
