@@ -48,17 +48,7 @@ weather:
 zwave:
   usb_path: /dev/ttyACM0
 
-media_player:
-  - platform: plex
-  - platform: webostv
-    host: !secret tv_ip_address 
-    name: Home Theater TV
-    turn_on_action:
-      service: wake_on_lan.send_magic_packet
-      data:
-        mac: !secret tv_mac_address
-  - platform: gpmdp
-    host: !secret prometheus_ip_address
+media_player: !include media_players.yaml
 
 device_tracker:
   - platform: unifi
