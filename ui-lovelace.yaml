@@ -10,12 +10,23 @@ views:
       - type: entities
         title: Switches
         show_header_toggle: true
-        entities:
-          - switch.kitchen_south_switch
-          - switch.kitchen_sink_south_switch
+        entities:          
           - switch.dining_room_east_switch
           - switch.front_door_south_switch
           - switch.flux
+      - type: entities
+        title: Kitchen Switches
+        show_header_toggle: true
+        entities:
+          - switch.kitchen_south_switch
+          - switch.kitchen_sink_south_switch
+          - light.kitchen_light_controller
+      - type: entities
+        title: Basement Switches
+        show_header_toggle: true
+        entities:
+          - light.home_theater_west_dimmer
+          - light.basement_rgbw_controller_main
       - type: entities
         title: Garage
         show_header_toggle: false
@@ -23,12 +34,6 @@ views:
           - sensor.garage_door_sensor_battery_level
           - sensor.garage_door
           - switch.garage_sconces_switch
-      - type: entities
-        title: All Lights
-        show_header_toggle: true
-        entities:
-          - light.kitchen_light_controller
-          - light.home_theater_west_dimmer
   - title: Cameras
     icon: mdi:cctv
     cards:
