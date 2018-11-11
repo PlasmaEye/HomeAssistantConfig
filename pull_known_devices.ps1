@@ -1,1 +1,1 @@
-Copy-Item -Path "\\hassio\config\known_devices.yaml" -Force
+Copy-Item -Path "\\hassio.local\config\known_devices.yaml" -Force
