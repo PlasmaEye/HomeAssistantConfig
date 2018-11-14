@@ -55,11 +55,17 @@
     entity_id: light.home_theater_west_dimmer
     state: 'on'
   action:
-    service: light.turn_on
-    entity_id: light.home_theater_west_dimmer
-    data:
-      brightness_pct: 10
-      transition: 5
+    - service: light.turn_on
+      entity_id: light.home_theater_west_dimmer
+      data:
+        brightness_pct: 10
+        transition: 3
+    - service: light.turn_on
+      entity_id: light.basement_rgbw_controller_main
+      data:
+        rgb_color: [255, 63, 0]
+        transition: 5
+        white_value: 0
 
 - alias: "Brighten lights when done watching TV"
   trigger:
@@ -71,8 +77,14 @@
     entity_id: light.home_theater_west_dimmer
     state: 'on'
   action:
-    service: light.turn_on
-    entity_id: light.home_theater_west_dimmer
-    data:
-      brightness_pct: 100
-      transition: 5
+    - service: light.turn_on
+      entity_id: light.home_theater_west_dimmer
+      data:
+        brightness_pct: 100
+        transition: 3
+    - service: light.turn_on
+      entity_id: light.basement_rgbw_controller_main
+      data:
+        rgb_color: [255, 255, 255]
+        transition: 5
+        white_value: 255
