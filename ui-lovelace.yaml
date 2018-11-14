@@ -47,6 +47,8 @@ views:
       - type: entities
         entities:
           - remote.harmony_hub
+          - type: section
+            label: Activities
           - entity: switch.watch_tv
             icon: mdi:television
           - entity: switch.play_switch
@@ -57,6 +59,32 @@ views:
             icon: mdi:netflix            
           - entity: switch.play_steam_link
             icon: mdi:steam
+          - entity: switch.listen_to_bluetooth
+            icon: mdi:bluetooth
+          - type: section
+            label: Actions
+          - type: call-service            
+            icon: mdi:volume-plus
+            name: Harmony
+            action_name: Volume Up
+            service: remote.send_command
+            service_data:
+              entity_id: remote.harmony_hub              
+              device: 52067007
+              command: VolumeUp
+              num_repeats: 4
+              delay_secs: 0.5
+          - type: call-service            
+            icon: mdi:volume-minus
+            name: Harmony
+            action_name: Volume Down
+            service: remote.send_command
+            service_data:
+              entity_id: remote.harmony_hub              
+              device: 52067007
+              command: VolumeDown
+              num_repeats: 4
+              delay_secs: 0.5
       - type: media-control
         entity: media_player.living_room_audio
       - type: media-control
