@@ -63,3 +63,5 @@ switch.watch_netflix_amazon:
   friendly_name: Watch Netflix/Amazon/Hulu/Plex
 switch.watch_tv:
   friendly_name: Watch TV
+switch.listen_to_bluetooth:
+  friendly_name: Listen to Bluetooth
