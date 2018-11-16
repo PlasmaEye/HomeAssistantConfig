@@ -42,7 +42,7 @@
     entity_id: 
       - light.kitchen_light_controller
 
-- alias: "Dim lights for movies"
+- alias: "Dim theater lights for movies"
   trigger:
     - platform: state
       entity_id: sensor.harmony_hub
@@ -60,6 +60,25 @@
       data:
         brightness_pct: 10
         transition: 3
+
+- alias: "Change light color for watching TV"
+  trigger:
+    - platform: state
+      entity_id: sensor.harmony_hub
+      to: 'Watch Netflix/Hulu/Plex/Amazon'
+    - platform: state
+      entity_id: sensor.harmony_hub
+      to: 'Watch a Movie'
+    - platform: state
+      entity_id: sensor.harmony_hub
+      to: 'Watch TV'
+    - platform: state
+      entity_id: sensor.harmony_hub
+      to: 'Play Steam Link'
+    - platform: state
+      entity_id: sensor.harmony_hub
+      to: 'Watch Switch'  
+  action:
     - service: light.turn_on
       entity_id: light.basement_rgbw_controller_main
       data:
@@ -82,6 +101,19 @@
       data:
         brightness_pct: 100
         transition: 3
+    - service: light.turn_on
+      entity_id: light.basement_rgbw_controller_main
+      data:
+        rgb_color: [255, 255, 255]
+        transition: 5
+        white_value: 255
+
+- alias: "Change light color when done watching TV"
+  trigger:
+    - platform: state
+      entity_id: sensor.harmony_hub
+      to: 'PowerOff'
+  action:
     - service: light.turn_on
       entity_id: light.basement_rgbw_controller_main
       data:

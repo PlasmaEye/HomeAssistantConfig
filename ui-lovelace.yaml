@@ -98,12 +98,14 @@ views:
         title: All Automations
         show_header_toggle: true
         entities:
+          - automation.switch_kitchen_under_cabinet_lights_on
           - automation.switch_kitchen_under_cabinet_lights_off
           - automation.outdoor_lights_on_when_dark
           - automation.outdoor_lights_off_when_light
-          - automation.dim_lights_for_movies
-          - automation.switch_kitchen_under_cabinet_lights_on
+          - automation.dim_theater_lights_for_movies
           - automation.brighten_lights_when_done_watching_tv
+          - automation.change_light_color_when_done_watching_tv
+          - automation.change_light_color_for_watching_tv
   - title: Current Network Status
     icon: mdi:lan
     cards:
