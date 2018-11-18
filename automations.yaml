@@ -77,7 +77,7 @@
       to: 'Play Steam Link'
     - platform: state
       entity_id: sensor.harmony_hub
-      to: 'Watch Switch'  
+      to: 'Play Nintendo Switch'  
   action:
     - service: light.turn_on
       entity_id: light.basement_rgbw_controller_main
@@ -101,12 +101,6 @@
       data:
         brightness_pct: 100
         transition: 3
-    - service: light.turn_on
-      entity_id: light.basement_rgbw_controller_main
-      data:
-        rgb_color: [255, 255, 255]
-        transition: 5
-        white_value: 255
 
 - alias: "Change light color when done watching TV"
   trigger:
