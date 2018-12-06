@@ -106,6 +106,7 @@ views:
           - automation.brighten_lights_when_done_watching_tv
           - automation.change_light_color_when_done_watching_tv
           - automation.change_light_color_for_watching_tv
+          - automation.porch_light_off_at_11
   - title: Current Network Status
     icon: mdi:lan
     cards:

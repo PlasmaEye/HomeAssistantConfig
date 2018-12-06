@@ -10,6 +10,15 @@
       - switch.front_door_south_switch
       - switch.garage_sconces_switch
 
+- alias: "Porch Light Off At 11"
+  trigger:
+    platform: time
+    at: '23:00:00'
+  action:
+    service: switch.turn_off
+    entity_id:
+      - switch.front_door_south_switch
+
 - alias: "Outdoor Lights Off When Light"
   trigger:
     platform: numeric_state
