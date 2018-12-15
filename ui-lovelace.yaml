@@ -27,6 +27,7 @@ views:
         entities:
           - light.home_theater_west_dimmer
           - light.basement_rgbw_controller_main
+          - light.basement_rgbw_controller_white
       - type: entities
         title: Garage
         show_header_toggle: false
