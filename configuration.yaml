@@ -70,13 +70,13 @@ camera:
     key: !secret unifi_video_api_key
     password: !secret unifi_video_camera_password
 
-switch: !include switches.yaml  
 
 remote:
   - platform: harmony
     name: Harmony Hub
     host: !secret harmony_hub_ip_address
 
+switch: !include switches.yaml  
 media_player: !include media_players.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
