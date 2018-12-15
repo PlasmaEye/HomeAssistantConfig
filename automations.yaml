@@ -73,33 +73,26 @@
 - alias: "Change light color for watching TV"
   trigger:
     - platform: state
-      entity_id: sensor.harmony_hub
-      to: 'Watch Netflix/Hulu/Plex/Amazon'
-    - platform: state
-      entity_id: sensor.harmony_hub
-      to: 'Watch a Movie'
-    - platform: state
-      entity_id: sensor.harmony_hub
-      to: 'Watch TV'
-    - platform: state
-      entity_id: sensor.harmony_hub
-      to: 'Play Steam Link'
-    - platform: state
-      entity_id: sensor.harmony_hub
-      to: 'Play Nintendo Switch'  
+      entity_id: media_player.home_theater_tv
+      from: 'off'
   action:
+    - service: light.turn_off
+      entity_id: light.basement_rgbw_controller_red    
+    - service: light.turn_off
+      entity_id: light.basement_rgbw_controller_green
+    - service: light.turn_off
+      entity_id: light.basement_rgbw_controller_blue
     - service: light.turn_on
-      entity_id: light.basement_rgbw_controller_main
+      entity_id: light.basement_rgbw_controller_white
       data:
-        rgb_color: [255, 63, 0]
         transition: 5
-        white_value: 0
+        brightness_pct: 30
 
 - alias: "Brighten lights when done watching TV"
   trigger:
     - platform: state
-      entity_id: sensor.harmony_hub
-      to: 'PowerOff'
+      entity_id: media_player.home_theater_tv
+      to: 'off'
   condition:
     condition: state
     entity_id: light.home_theater_west_dimmer
@@ -114,8 +107,8 @@
 - alias: "Change light color when done watching TV"
   trigger:
     - platform: state
-      entity_id: sensor.harmony_hub
-      to: 'PowerOff'
+      entity_id: media_player.home_theater_tv
+      to: 'off'
   action:
     - service: light.turn_on
       entity_id: light.basement_rgbw_controller_main
