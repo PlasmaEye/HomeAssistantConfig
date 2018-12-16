@@ -82,3 +82,4 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include_dir_merge_named script
 sensor: !include sensors.yaml
+notify: !include notifications.yaml
