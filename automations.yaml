@@ -53,28 +53,32 @@
 
 - alias: "Dim theater lights for movies"
   trigger:
-    - platform: state
-      entity_id: sensor.harmony_hub
-      to: 'Watch Netflix/Hulu/Plex/Amazon'
-    - platform: state
-      entity_id: sensor.harmony_hub
-      to: 'Watch a Movie'
+    - platform: template
+      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Plex') }}"
+    - platform: template
+      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Amazon Prime Video') }}"
+    - platform: template
+      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Netflix') }}"
+    - platform: template
+      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Google Play Movies & TV') }}"      
+    - platform: template
+      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Hulu') }}"      
   condition:
     condition: state
     entity_id: light.home_theater_west_dimmer
     state: 'on'
   action:
-    - service: light.turn_on
-      entity_id: light.home_theater_west_dimmer
-      data:
-        brightness_pct: 10
-        transition: 3
+    service: light.turn_on
+    entity_id: light.home_theater_west_dimmer
+    data:
+      brightness_pct: 10
+      transition: 3
 
 - alias: "Change light color for watching TV"
   trigger:
-    - platform: state
-      entity_id: media_player.home_theater_tv
-      from: 'off'
+    platform: state
+    entity_id: media_player.home_theater_tv
+    from: 'off'
   action:
     - service: light.turn_off
       entity_id: light.basement_rgbw_controller_red    
@@ -90,29 +94,29 @@
 
 - alias: "Brighten lights when done watching TV"
   trigger:
-    - platform: state
-      entity_id: media_player.home_theater_tv
-      to: 'off'
+    platform: state
+    entity_id: media_player.home_theater_tv
+    to: 'off'
   condition:
     condition: state
     entity_id: light.home_theater_west_dimmer
     state: 'on'
   action:
-    - service: light.turn_on
-      entity_id: light.home_theater_west_dimmer
-      data:
-        brightness_pct: 100
-        transition: 3
+    service: light.turn_on
+    entity_id: light.home_theater_west_dimmer
+    data:
+      brightness_pct: 100
+      transition: 3
 
 - alias: "Change light color when done watching TV"
   trigger:
-    - platform: state
-      entity_id: media_player.home_theater_tv
-      to: 'off'
+    platform: state
+    entity_id: media_player.home_theater_tv
+    to: 'off'
   action:
-    - service: light.turn_on
-      entity_id: light.basement_rgbw_controller_main
-      data:
-        rgb_color: [255, 255, 255]
-        transition: 5
-        white_value: 255
+    service: light.turn_on
+    entity_id: light.basement_rgbw_controller_main
+    data:
+      rgb_color: [255, 255, 255]
+      transition: 5
+      white_value: 255
