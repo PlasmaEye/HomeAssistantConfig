@@ -120,3 +120,18 @@
       rgb_color: [255, 255, 255]
       transition: 5
       white_value: 255
+
+- alias: "Turn off home theater lights if basement lights turn off"
+  trigger:
+    platform: state
+    entity_id: light.basement_rgbw_controller_main
+    to: 'off'
+    for:
+      seconds: 5
+  condition:
+    condition: state
+    entity_id: light.home_theater_west_dimmer
+    state: 'on'
+  action:
+    service: light.turn_off
+    entity_id: light.home_theater_west_dimmer
