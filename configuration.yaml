@@ -70,6 +70,12 @@ camera:
     key: !secret unifi_video_api_key
     password: !secret unifi_video_camera_password
 
+octoprint:
+  host: !secret technetium_ip_address
+  api_key: !secret octoprint_api_key
+  port: 5000
+  bed: true
+  number_of_tools: 2
 
 remote:
   - platform: harmony
