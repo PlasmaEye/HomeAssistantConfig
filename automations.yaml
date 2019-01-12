@@ -79,6 +79,10 @@
     platform: state
     entity_id: media_player.home_theater_tv
     from: 'off'
+  condition:
+    condition: state
+    entity_id: light.basement_rgbw_controller_main
+    state: 'on'
   action:
     - service: light.turn_off
       entity_id: light.basement_rgbw_controller_red    
@@ -113,6 +117,10 @@
     platform: state
     entity_id: media_player.home_theater_tv
     to: 'off'
+  condition:
+    condition: state
+    entity_id: light.basement_rgbw_controller_main
+    state: 'on'
   action:
     service: light.turn_on
     entity_id: light.basement_rgbw_controller_main
