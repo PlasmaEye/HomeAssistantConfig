@@ -30,6 +30,7 @@ history:
 logbook:
 
 recorder:
+  db_url: !secret mariadb_address
 
 sun:
 
