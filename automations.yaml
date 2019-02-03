@@ -31,26 +31,6 @@
       - switch.front_door_south_switch
       - switch.garage_sconces_switch
 
-- alias: "Switch Kitchen Under Cabinet Lights On"
-  trigger:
-    platform: state
-    entity_id: switch.kitchen_south_switch
-    to: 'on'
-  action:
-    service: light.turn_on
-    entity_id: 
-      - light.kitchen_light_controller
-
-- alias: "Switch Kitchen Under Cabinet Lights Off"
-  trigger:
-    platform: state
-    entity_id: switch.kitchen_south_switch
-    to: 'off'
-  action:
-    service: light.turn_off
-    entity_id: 
-      - light.kitchen_light_controller
-
 - alias: "Dim theater lights for movies"
   trigger:
     - platform: template
@@ -63,6 +43,8 @@
       value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Google Play Movies & TV') }}"      
     - platform: template
       value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Hulu') }}"      
+    - platform: template
+      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Watch a Movie') }}"      
   condition:
     condition: state
     entity_id: light.home_theater_west_dimmer
