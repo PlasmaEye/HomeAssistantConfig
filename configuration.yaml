@@ -10,6 +10,8 @@ homeassistant:
 
 frontend:
 
+system_health:
+
 config:
 
 http:
@@ -51,7 +53,7 @@ zwave:
 
 device_tracker:
   - platform: unifi
-    host: !secret atlas_ip_address
+    host: !secret heracles_ip_address
     username: !secret unifi_username
     password: !secret unifi_password
     verify_ssl: false
