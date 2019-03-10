@@ -125,3 +125,19 @@
   action:
     service: light.turn_off
     entity_id: light.home_theater_west_dimmer
+
+- alias: "Notify when garage is open for too long"
+  trigger:
+    platform: state
+    entity_id: sensor.garage_door
+    to: 'Open'
+    for:
+      hours: 1
+  action:
+    service: notify.notify
+    data_template: 
+      message: "The garage door has been open longer than an hour"
+    data:
+      title: "Garage Door Open"
+      data:
+        sound: gamelan
