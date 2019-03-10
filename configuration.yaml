@@ -51,13 +51,6 @@ weather:
 zwave:
   usb_path: /dev/ttyACM0
 
-device_tracker:
-  - platform: unifi
-    host: !secret heracles_ip_address
-    username: !secret unifi_username
-    password: !secret unifi_password
-    verify_ssl: false
-
 camera:
   - platform: uvc
     nvr: !secret atlas_ip_address
