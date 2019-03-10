@@ -2,3 +2,6 @@
   host: !secret tv_ip_address
   name: home_theater_tv
   
+- platform: pushover
+  api_key: !secret pushover_api_key
+  user_key: !secret pushover_user_key
