@@ -141,3 +141,32 @@
       title: "Garage Door Open"
       data:
         sound: gamelan
+      
+- alias: "Notify when TV has been on for too long"
+  trigger: 
+    platform: state
+    entity_id: media_player.home_theater_tv
+    to: 'on'
+    for:
+      hours: 3
+  action:
+    service: notify.notify
+    data_template:
+      message: "The TV has been on for longer than 3 hours"
+    data:
+      title: "TV is On"
+      data:
+        sound: tugboat
+      
+- alias: "Notify when printer is done printing"
+  trigger: 
+    platform: state
+    entity_id: sensor.octoprint_current_state
+    from: 'Printing'
+  action:
+    service: notify.notify
+    data_template:
+      message: "The printer has finished printing"
+    data:
+      title: "3D Printer is Done"
+      device: pixelxl
