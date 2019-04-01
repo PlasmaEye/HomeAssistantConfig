@@ -146,7 +146,7 @@
   trigger: 
     platform: state
     entity_id: media_player.home_theater_tv
-    to: 'Playing'
+    to: 'playing'
     for:
       hours: 3
   action:
@@ -169,4 +169,5 @@
       message: "The printer has finished printing"
     data:
       title: "3D Printer is Done"
-      device: pixelxl
+      data:
+        device: pixelxl
