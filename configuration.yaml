@@ -51,11 +51,17 @@ weather:
 zwave:
   usb_path: /dev/ttyACM0
 
+stream: 
+
 camera:
   - platform: uvc
     nvr: !secret atlas_ip_address
     key: !secret unifi_video_api_key
     password: !secret unifi_video_camera_password
+  - platform: mjpeg
+    mjpeg_url: http://technetium.local:8080/?action=stream
+    still_image_url: http://technetium.local:8080/?action=snapshot
+    name: 3dprinter
 
 octoprint:
   host: !secret technetium_ip_address
