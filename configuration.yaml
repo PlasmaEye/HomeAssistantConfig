@@ -53,6 +53,10 @@ zwave:
 
 stream: 
 
+light:
+  - platform: flux_led
+  automatic_add: true
+
 camera:
   - platform: uvc
     nvr: !secret atlas_ip_address
