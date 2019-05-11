@@ -163,11 +163,34 @@
     platform: state
     entity_id: sensor.octoprint_current_state
     from: 'Printing'
-  action:
-    service: notify.notify
-    data_template:
-      message: "The printer has finished printing"
-    data:
-      title: "3D Printer is Done"
+  action:  
+    - service: light.turn_on
+      entity_id: light.f0fe6b5ac15e_192_168_1_50
       data:
-        device: pixelxl
+        effect: colorloop
+    - service: light.turn_on
+      entity_id: light.f0fe6b5ac15e_192_168_1_50
+      data:
+        white_value: 0
+    - service: notify.notify
+      data_template:
+        message: "The printer has finished printing"
+      data:
+        title: "3D Printer is Done"
+        data:
+          device: pixelxl
+
+- alias: "Turn 3D printer light to white when printing"
+  trigger:
+      platform: state
+      entity_id: sensor.octoprint_current_state
+      to: 'Printing'
+  action:
+    - service: light.turn_on
+      entity_id: light.f0fe6b5ac15e_192_168_1_50
+      data:          
+        white_value: 255
+    - service: light.turn_on
+      entity_id: light.f0fe6b5ac15e_192_168_1_50
+      data:          
+        rgb_color: [255,255,255]
