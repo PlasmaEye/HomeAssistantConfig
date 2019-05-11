@@ -1,11 +1,5 @@
-- platform: darksky
-  api_key: !secret dark_sky_key
-  monitored_conditions:
-    - apparent_temperature_low
-    - apparent_temperature_high
-
 - platform: pi_hole
-  host: !secret atlas_ip_address
+  host: !secret heracles_ip_address
   monitored_conditions:
     - ads_percentage_today
     - dns_queries_today

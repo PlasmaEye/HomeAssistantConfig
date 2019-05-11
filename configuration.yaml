@@ -1,6 +1,11 @@
 homeassistant:
-  name: Home
-
+  name: Home  
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+      - !secret local_network
+      - !secret vpn_network
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: !secret home_elevation
@@ -9,6 +14,7 @@ homeassistant:
   customize: !include customize.yaml
 
 frontend:
+  themes: !include themes.yaml
 
 system_health:
 
@@ -18,10 +24,7 @@ http:
   api_password: !secret http_password
   server_port: 8123
   base_url: hassio.local
-  trusted_networks:
-    - !secret local_network
-    - !secret vpn_network
-
+      
 updater:
   include_used_components: true
 
@@ -37,7 +40,7 @@ recorder:
 sun:
 
 tts:
-  - platform: google
+  - platform: google_translate
 
 mqtt:
   broker: core-mosquitto
@@ -47,6 +50,7 @@ wake_on_lan:
 weather:
   - platform: darksky
     api_key: !secret dark_sky_key
+    units: us
 
 zwave:
   usb_path: /dev/ttyACM0
@@ -55,7 +59,7 @@ stream:
 
 light:
   - platform: flux_led
-  automatic_add: true
+    automatic_add: true
 
 camera:
   - platform: uvc
