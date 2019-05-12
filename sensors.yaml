@@ -23,3 +23,8 @@
       friendly_name: 'Garage Door Sensor Battery Level'
 
 - platform: plex
+
+- platform: darksky
+  api_key: !secret dark_sky_key
+  monitored_conditions:
+    - cloud_cover

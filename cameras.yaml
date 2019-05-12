@@ -7,5 +7,8 @@
   name: Garage
   still_image_url: !secret garage_camera_still
   stream_source: !secret garage_camera_rtsp
-  username: !secret garage_camera_rtsp_user
-  password: !secret garage_camera_rtsp_password
+
+- platform: generic
+  name: G3 Flex
+  still_image_url: !secret g3_flex_camera_still
+  stream_source: !secret g3_flex_camera_rtsp
