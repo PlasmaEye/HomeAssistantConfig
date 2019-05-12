@@ -10,6 +10,22 @@
       - switch.front_door_south_switch
       - switch.garage_sconces_switch
 
+- alias: "Outdoor Lights On When Dark and Cloudy"
+  trigger:
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: "{{ state.attributes.elevation }}"
+    below: 0
+  condition:
+    - condition: numeric_state
+      entity_id: 'sensor.dark_sky_cloud_cover'
+      above: 80
+  action:
+    service: switch.turn_on
+    entity_id: 
+      - switch.front_door_south_switch
+      - switch.garage_sconces_switch
+
 - alias: "Porch Light Off At 11"
   trigger:
     platform: time
@@ -19,12 +35,28 @@
     entity_id:
       - switch.front_door_south_switch
 
-- alias: "Outdoor Lights Off When Light"
+- alias: "Outdoor Lights Off When Light and Cloudy"
   trigger:
     platform: numeric_state
     entity_id: sun.sun
     value_template: "{{ state.attributes.elevation }}"
     above: -4.0
+  condition:
+    - condition: numeric_state
+      entity_id: 'sensor.dark_sky_cloud_cover'
+      below: 80
+  action:
+    service: switch.turn_off
+    entity_id: 
+      - switch.front_door_south_switch
+      - switch.garage_sconces_switch
+
+- alias: "Outdoor Lights Off When Light"
+  trigger:
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: "{{ state.attributes.elevation }}"
+    above: 0
   action:
     service: switch.turn_off
     entity_id: 
