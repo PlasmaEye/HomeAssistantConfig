@@ -12,3 +12,10 @@
   name: G3 Flex
   still_image_url: !secret g3_flex_camera_still
   stream_source: !secret g3_flex_camera_rtsp
+
+- platform: generic
+  name: Kids Room
+  still_image_url: !secret kids_camera_still
+  stream_source: !secret kids_camera_rtsp
+
+  
