@@ -1,4 +1,5 @@
-- alias: "Outdoor Lights On When Dark"
+- id: outdoor_lights_on_when_dark
+  alias: "Outdoor Lights On When Dark"
   trigger: 
     platform: numeric_state
     entity_id: sun.sun
@@ -10,7 +11,8 @@
       - switch.front_door_south_switch
       - switch.garage_sconces_switch
 
-- alias: "Outdoor Lights On When Dark and Cloudy"
+- id: outdoor_lights_on_when_dark_and_cloudy
+  alias: "Outdoor Lights On When Dark and Cloudy"
   trigger:
     platform: numeric_state
     entity_id: sun.sun
@@ -26,7 +28,8 @@
       - switch.front_door_south_switch
       - switch.garage_sconces_switch
 
-- alias: "Porch Light Off At 11"
+- id: porch_light_off_at_11
+  alias: "Porch Light Off At 11"
   trigger:
     platform: time
     at: '23:00:00'
@@ -35,7 +38,8 @@
     entity_id:
       - switch.front_door_south_switch
 
-- alias: "Outdoor Lights Off When Light and Cloudy"
+- id: outdoor_lights_off_when_light_and_cloudy
+  alias: "Outdoor Lights Off When Light and Cloudy"
   trigger:
     platform: numeric_state
     entity_id: sun.sun
@@ -51,7 +55,8 @@
       - switch.front_door_south_switch
       - switch.garage_sconces_switch
 
-- alias: "Outdoor Lights Off When Light"
+- id: outdoor_lights_off_when_light
+  alias: "Outdoor Lights Off When Light"
   trigger:
     platform: numeric_state
     entity_id: sun.sun
@@ -63,7 +68,8 @@
       - switch.front_door_south_switch
       - switch.garage_sconces_switch
 
-- alias: "Dim theater lights for movies"
+- id: dim_theater_lights_for_movies
+  alias: "Dim theater lights for movies"
   trigger:
     - platform: template
       value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Plex') }}"
@@ -88,7 +94,8 @@
       brightness_pct: 10
       transition: 3
 
-- alias: "Change light color for watching TV"
+- id: change_light_color_for_watching_tv
+  alias: "Change light color for watching TV"
   trigger:
     platform: state
     entity_id: media_player.home_theater_tv
@@ -110,7 +117,8 @@
         transition: 5
         brightness_pct: 30
 
-- alias: "Brighten lights when done watching TV"
+- id: brighten_lights_when_done_watching_tv
+  alias: "Brighten lights when done watching TV"
   trigger:
     platform: state
     entity_id: media_player.home_theater_tv
@@ -126,7 +134,8 @@
       brightness_pct: 100
       transition: 3
 
-- alias: "Change light color when done watching TV"
+- id: change_light_color_when_done_watching_tv
+  alias: "Change light color when done watching TV"
   trigger:
     platform: state
     entity_id: media_player.home_theater_tv
@@ -143,7 +152,8 @@
       transition: 5
       white_value: 255
 
-- alias: "Turn off home theater lights if basement lights turn off"
+- id: turn_off_home_theater_lights_if_basement_lights_turn_off
+  alias: "Turn off home theater lights if basement lights turn off"
   trigger:
     platform: state
     entity_id: light.basement_rgbw_controller_main
@@ -158,7 +168,8 @@
     service: light.turn_off
     entity_id: light.home_theater_west_dimmer
 
-- alias: "Notify when garage is open for too long"
+- id: notify_when_garage_is_open_for_too_long
+  alias: "Notify when garage is open for too long"
   trigger:
     platform: state
     entity_id: sensor.garage_door
@@ -174,7 +185,8 @@
       data:
         sound: gamelan
       
-- alias: "Notify when TV has been on for too long"
+- id: notify_when_tv_has_been_on_for_too_long
+  alias: "Notify when TV has been on for too long"
   trigger: 
     platform: state
     entity_id: media_player.home_theater_tv
@@ -190,18 +202,19 @@
       data:
         sound: tugboat
       
-- alias: "Notify when printer is done printing"
+- id: notify_when_printer_is_done_printing
+  alias: "Notify when printer is done printing"
   trigger: 
     platform: state
     entity_id: sensor.octoprint_current_state
     from: 'Printing'
   action:  
     - service: light.turn_on
-      entity_id: light.f0fe6b5ac15e_192_168_1_50
+      entity_id: light.3d_printer_lights
       data:
         effect: colorloop
     - service: light.turn_on
-      entity_id: light.f0fe6b5ac15e_192_168_1_50
+      entity_id: light.3d_printer_lights
       data:
         white_value: 0
     - service: notify.notify
@@ -212,17 +225,18 @@
         data:
           device: pixelxl
 
-- alias: "Turn 3D printer light to white when printing"
+- id: turn_3d_printer_light_to_white_when_printing
+  alias: "Turn 3D printer light to white when printing"
   trigger:
       platform: state
       entity_id: sensor.octoprint_current_state
       to: 'Printing'
   action:
     - service: light.turn_on
-      entity_id: light.f0fe6b5ac15e_192_168_1_50
+      entity_id: light.3d_printer_lights
       data:          
         white_value: 255
     - service: light.turn_on
-      entity_id: light.f0fe6b5ac15e_192_168_1_50
+      entity_id: light.3d_printer_lights
       data:          
         rgb_color: [255,255,255]
