@@ -6,6 +6,7 @@ homeassistant:
       trusted_networks:
       - !secret local_network
       - !secret vpn_network
+      allow_bypass_login: true
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: !secret home_elevation
@@ -58,8 +59,18 @@ stream:
 
 light:
   - platform: flux_led
-    automatic_add: true
+    devices:
+      192.168.1.50:
+        name: 3d_printer_lights
+        mode: "rgbw"
+        protocol: "ledenet"
 
+device_tracker:
+  - platform: unifi
+    host: unifi
+    username: unifi_username
+    password: unifi_password
+    verify_ssl: false
 
 octoprint:
   host: !secret technetium_ip_address
