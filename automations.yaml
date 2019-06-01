@@ -240,3 +240,26 @@
       entity_id: light.3d_printer_lights
       data:          
         rgb_color: [255,255,255]
+
+- id: 'turn_garage_interior_lights_on_when_garage_door_opens'
+  alias: Turn garage interior lights on when garage door opens
+  trigger:
+  - entity_id: sensor.garage_door
+    platform: state
+    to: Open
+  condition:
+  - condition: template
+    value_template: '{{ states.sun.sun.attributes.elevation < 0 }}'
+  action:
+  - service: switch.turn_on
+    entity_id: switch.garage_interior_lights
+
+- id: 'turn_garage_interior_lights_off_when_garage_door_closes'
+  alias: Turn garage interior lights off when garage door closes
+  trigger:
+  - entity_id: sensor.garage_door
+    platform: state
+    to: Closed
+  action:
+    service: switch.turn_off
+    entity_id: switch.garage_interior_lights

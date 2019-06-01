@@ -28,3 +28,8 @@
   api_key: !secret dark_sky_key
   monitored_conditions:
     - cloud_cover
+
+- platform: my_unifi
+  username: !secret unifi_username
+  password: !secret unifi_password
+  url: !secret unifi_url
