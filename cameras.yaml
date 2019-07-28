@@ -1,6 +1,6 @@
 - platform: mjpeg
-  mjpeg_url: http://technetium.local:8080/?action=stream
-  still_image_url: http://technetium.local:8080/?action=snapshot
+  mjpeg_url: http://gaia.local:8080/?action=stream
+  still_image_url: http://gaia.local:8080/?action=snapshot
   name: 3dprinter
 
 - platform: generic

@@ -73,9 +73,9 @@ device_tracker:
     verify_ssl: false
 
 octoprint:
-  host: !secret technetium_ip_address
+  host: !secret gaia_ip_address
   api_key: !secret octoprint_api_key
-  port: 5000
+  port: 80
   bed: true
   number_of_tools: 2
 
