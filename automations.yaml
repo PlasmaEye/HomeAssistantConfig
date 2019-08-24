@@ -1,88 +1,89 @@
 - id: outdoor_lights_on_when_dark
-  alias: "Outdoor Lights On When Dark"
-  trigger: 
-    platform: numeric_state
-    entity_id: sun.sun
-    value_template: "{{ state.attributes.elevation }}"
-    below: -4.0
-  action:
-    service: switch.turn_on
-    entity_id: 
-      - switch.front_door_south_switch
-      - switch.garage_sconces_switch
-
-- id: outdoor_lights_on_when_dark_and_cloudy
-  alias: "Outdoor Lights On When Dark and Cloudy"
+  alias: Outdoor Lights On When Dark
   trigger:
     platform: numeric_state
     entity_id: sun.sun
-    value_template: "{{ state.attributes.elevation }}"
-    below: 0
-  condition:
-    - condition: numeric_state
-      entity_id: 'sensor.dark_sky_cloud_cover'
-      above: 80
+    value_template: '{{ state.attributes.elevation }}'
+    below: -4.0
   action:
     service: switch.turn_on
-    entity_id: 
-      - switch.front_door_south_switch
-      - switch.garage_sconces_switch
-
+    entity_id:
+    - switch.front_door_south_switch
+    - switch.garage_sconces_switch
+- id: outdoor_lights_on_when_dark_and_cloudy
+  alias: Outdoor Lights On When Dark and Cloudy
+  trigger:
+    platform: numeric_state
+    entity_id: sun.sun
+    value_template: '{{ state.attributes.elevation }}'
+    below: 0
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.dark_sky_cloud_cover
+    above: 80
+  action:
+    service: switch.turn_on
+    entity_id:
+    - switch.front_door_south_switch
+    - switch.garage_sconces_switch
 - id: porch_light_off_at_11
-  alias: "Porch Light Off At 11"
+  alias: Porch Light Off At 11
   trigger:
     platform: time
     at: '23:00:00'
   action:
     service: switch.turn_off
     entity_id:
-      - switch.front_door_south_switch
-
+    - switch.front_door_south_switch
 - id: outdoor_lights_off_when_light_and_cloudy
-  alias: "Outdoor Lights Off When Light and Cloudy"
+  alias: Outdoor Lights Off When Light and Cloudy
   trigger:
     platform: numeric_state
     entity_id: sun.sun
-    value_template: "{{ state.attributes.elevation }}"
+    value_template: '{{ state.attributes.elevation }}'
     above: -4.0
   condition:
-    - condition: numeric_state
-      entity_id: 'sensor.dark_sky_cloud_cover'
-      below: 80
+  - condition: numeric_state
+    entity_id: sensor.dark_sky_cloud_cover
+    below: 80
   action:
     service: switch.turn_off
-    entity_id: 
-      - switch.front_door_south_switch
-      - switch.garage_sconces_switch
-
+    entity_id:
+    - switch.front_door_south_switch
+    - switch.garage_sconces_switch
 - id: outdoor_lights_off_when_light
-  alias: "Outdoor Lights Off When Light"
+  alias: Outdoor Lights Off When Light
   trigger:
     platform: numeric_state
     entity_id: sun.sun
-    value_template: "{{ state.attributes.elevation }}"
+    value_template: '{{ state.attributes.elevation }}'
     above: 0
   action:
     service: switch.turn_off
-    entity_id: 
-      - switch.front_door_south_switch
-      - switch.garage_sconces_switch
-
+    entity_id:
+    - switch.front_door_south_switch
+    - switch.garage_sconces_switch
 - id: dim_theater_lights_for_movies
-  alias: "Dim theater lights for movies"
+  alias: Dim theater lights for movies
   trigger:
-    - platform: template
-      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Plex') }}"
-    - platform: template
-      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Amazon Prime Video') }}"
-    - platform: template
-      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Netflix') }}"
-    - platform: template
-      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Google Play Movies & TV') }}"      
-    - platform: template
-      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Hulu') }}"      
-    - platform: template
-      value_template: "{{ is_state_attr('media_player.home_theater_tv', 'source', 'Watch a Movie') }}"      
+  - platform: template
+    value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
+      ''Plex'') }}'
+  - platform: template
+    value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
+      ''Amazon Prime Video'') }}'
+  - platform: template
+    value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
+      ''Netflix'') }}'
+  - platform: template
+    value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
+      ''Google Play Movies & TV'') }}'
+  - platform: template
+    value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
+      ''Hulu'') }}'
+  - platform: template
+    value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
+      ''Watch a Movie'') }}'
   condition:
     condition: state
     entity_id: light.home_theater_west_dimmer
@@ -93,9 +94,8 @@
     data:
       brightness_pct: 10
       transition: 3
-
 - id: change_light_color_for_watching_tv
-  alias: "Change light color for watching TV"
+  alias: Change light color for watching TV
   trigger:
     platform: state
     entity_id: media_player.home_theater_tv
@@ -105,20 +105,19 @@
     entity_id: light.basement_rgbw_controller_main
     state: 'on'
   action:
-    - service: light.turn_off
-      entity_id: light.basement_rgbw_controller_red    
-    - service: light.turn_off
-      entity_id: light.basement_rgbw_controller_green
-    - service: light.turn_off
-      entity_id: light.basement_rgbw_controller_blue
-    - service: light.turn_on
-      entity_id: light.basement_rgbw_controller_white
-      data:
-        transition: 5
-        brightness_pct: 30
-
+  - service: light.turn_off
+    entity_id: light.basement_rgbw_controller_red
+  - service: light.turn_off
+    entity_id: light.basement_rgbw_controller_green
+  - service: light.turn_off
+    entity_id: light.basement_rgbw_controller_blue
+  - service: light.turn_on
+    entity_id: light.basement_rgbw_controller_white
+    data:
+      transition: 5
+      brightness_pct: 30
 - id: brighten_lights_when_done_watching_tv
-  alias: "Brighten lights when done watching TV"
+  alias: Brighten lights when done watching TV
   trigger:
     platform: state
     entity_id: media_player.home_theater_tv
@@ -133,9 +132,8 @@
     data:
       brightness_pct: 100
       transition: 3
-
 - id: change_light_color_when_done_watching_tv
-  alias: "Change light color when done watching TV"
+  alias: Change light color when done watching TV
   trigger:
     platform: state
     entity_id: media_player.home_theater_tv
@@ -148,12 +146,14 @@
     service: light.turn_on
     entity_id: light.basement_rgbw_controller_main
     data:
-      rgb_color: [255, 255, 255]
+      rgb_color:
+      - 255
+      - 255
+      - 255
       transition: 5
       white_value: 255
-
 - id: turn_off_home_theater_lights_if_basement_lights_turn_off
-  alias: "Turn off home theater lights if basement lights turn off"
+  alias: Turn off home theater lights if basement lights turn off
   trigger:
     platform: state
     entity_id: light.basement_rgbw_controller_main
@@ -167,81 +167,79 @@
   action:
     service: light.turn_off
     entity_id: light.home_theater_west_dimmer
-
 - id: notify_when_garage_is_open_for_too_long
-  alias: "Notify when garage is open for too long"
+  alias: Notify when garage is open for too long
   trigger:
     platform: state
     entity_id: sensor.garage_door
-    to: 'Open'
+    to: Open
     for:
       hours: 1
   action:
     service: notify.notify
-    data_template: 
-      message: "The garage door has been open longer than an hour"
+    data_template:
+      message: The garage door has been open longer than an hour
     data:
-      title: "Garage Door Open"
+      title: Garage Door Open
       data:
         sound: gamelan
-      
 - id: notify_when_tv_has_been_on_for_too_long
-  alias: "Notify when TV has been on for too long"
-  trigger: 
+  alias: Notify when TV has been on for too long
+  trigger:
     platform: state
     entity_id: media_player.home_theater_tv
-    to: 'playing'
+    to: playing
     for:
       hours: 3
   action:
     service: notify.notify
     data_template:
-      message: "The TV has been on for longer than 3 hours"
+      message: The TV has been on for longer than 3 hours
     data:
-      title: "TV is On"
+      title: TV is On
       data:
         sound: tugboat
-      
 - id: notify_when_printer_is_done_printing
-  alias: "Notify when printer is done printing"
-  trigger: 
+  alias: Notify when printer is done printing
+  trigger:
     platform: state
     entity_id: sensor.octoprint_current_state
-    from: 'Printing'
-  action:  
-    - service: light.turn_on
-      entity_id: light.3d_printer_lights
-      data:
-        effect: colorloop
-    - service: light.turn_on
-      entity_id: light.3d_printer_lights
-      data:
-        white_value: 0
-    - service: notify.notify
-      data_template:
-        message: "The printer has finished printing"
-      data:
-        title: "3D Printer is Done"
-        data:
-          device: pixelxl
-
-- id: turn_3d_printer_light_to_white_when_printing
-  alias: "Turn 3D printer light to white when printing"
-  trigger:
-      platform: state
-      entity_id: sensor.octoprint_current_state
-      to: 'Printing'
+    from: Printing
   action:
-    - service: light.turn_on
-      entity_id: light.3d_printer_lights
-      data:          
-        white_value: 255
-    - service: light.turn_on
-      entity_id: light.3d_printer_lights
-      data:          
-        rgb_color: [255,255,255]
-
-- id: 'turn_garage_interior_lights_on_when_garage_door_opens'
+  - service: light.turn_on
+    entity_id: light.3d_printer_lights
+    data:
+      effect: colorloop
+  - service: light.turn_on
+    entity_id: light.3d_printer_lights
+    data:
+      white_value: 0
+  - service: notify.notify
+    data_template:
+      message: The printer has finished printing
+    data:
+      title: 3D Printer is Done
+      data:
+        device: pixelxl
+- id: turn_3d_printer_light_to_white_when_printing
+  alias: Turn 3D printer light to white when printing
+  trigger:
+    platform: state
+    entity_id: sensor.octoprint_current_state
+    to: Printing
+  action:
+  - service: light.turn_on
+    entity_id: light.3d_printer_lights
+    data:
+      white_value: 255
+  - service: light.turn_on
+    entity_id: light.3d_printer_lights
+    data:
+      rgb_color:
+      - 255
+      - 255
+      - 255
+- id: turn_garage_interior_lights_on_when_garage_door_opens
   alias: Turn garage interior lights on when garage door opens
   trigger:
   - entity_id: sensor.garage_door
@@ -253,8 +251,7 @@
   action:
   - service: switch.turn_on
     entity_id: switch.garage_interior_lights
-
-- id: 'turn_garage_interior_lights_off_when_garage_door_closes'
+- id: turn_garage_interior_lights_off_when_garage_door_closes
   alias: Turn garage interior lights off when garage door closes
   trigger:
   - entity_id: sensor.garage_door
@@ -263,3 +260,16 @@
   action:
     service: switch.turn_off
     entity_id: switch.garage_interior_lights
+- id: '1566659647483'
+  alias: Turn garage interior lights on if door open and sunset
+  trigger:
+  - event: sunset
+    platform: sun
+  condition:
+  - condition: state
+    entity_id: sensor.garage_door
+    state: Open
+  action:
+  - data:
+      entity_id: switch.garage_interior_lights
+    service: switch.turn_on
