@@ -1,5 +1,0 @@
-set_nest_away:
-  sequence:
-    - service: nest.set_mode
-      data:
-        home_mode: away
