@@ -1,5 +1,3 @@
-- platform: plex
-
 - platform: webostv
   host: !secret tv_ip_address 
   name: Home Theater TV

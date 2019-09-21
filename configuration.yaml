@@ -65,12 +65,12 @@ light:
         mode: "rgbw"
         protocol: "ledenet"
 
-device_tracker:
-  - platform: unifi
-    host: unifi
-    username: unifi_username
-    password: unifi_password
-    verify_ssl: false
+unifi:
+  controllers:
+    - host: unifi
+      site: Default
+
+pi_hole:
 
 octoprint:
   host: !secret gaia_ip_address

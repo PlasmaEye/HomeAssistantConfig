@@ -205,22 +205,16 @@
     platform: state
     entity_id: sensor.octoprint_current_state
     from: Printing
-  action:
-  - service: light.turn_on
-    entity_id: light.3d_printer_lights
-    data:
-      effect: colorloop
+  action:    
   - service: light.turn_on
     entity_id: light.3d_printer_lights
     data:
       white_value: 0
-  - service: notify.notify
-    data_template:
-      message: The printer has finished printing
+  - delay: '00:00:03'
+  - service: light.turn_on
+    entity_id: light.3d_printer_lights
     data:
-      title: 3D Printer is Done
-      data:
-        device: pixelxl
+      effect: colorloop
 - id: turn_3d_printer_light_to_white_when_printing
   alias: Turn 3D printer light to white when printing
   trigger:
