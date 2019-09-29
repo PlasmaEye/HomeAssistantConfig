@@ -9,9 +9,9 @@
   stream_source: !secret garage_camera_rtsp
 
 - platform: generic
-  name: G3 Flex
-  still_image_url: !secret g3_flex_camera_still
-  stream_source: !secret g3_flex_camera_rtsp
+  name: Front Door
+  still_image_url: !secret front_door_camera_still
+  stream_source: !secret front_door_camera_rtsp
 
 - platform: generic
   name: Kids Room
