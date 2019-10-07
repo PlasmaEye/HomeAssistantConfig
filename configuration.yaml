@@ -13,6 +13,8 @@ homeassistant:
   unit_system: imperial
   time_zone: America/Chicago
   customize: !include customize.yaml
+  whitelist_external_dirs:
+    - /tmp
 
 frontend:
   themes: !include themes.yaml
