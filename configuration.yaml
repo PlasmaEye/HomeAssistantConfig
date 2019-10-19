@@ -6,7 +6,6 @@ homeassistant:
       trusted_networks:
       - !secret local_network
       - !secret vpn_network
-      allow_bypass_login: true
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: !secret home_elevation
@@ -22,6 +21,8 @@ frontend:
 system_health:
 
 config:
+
+cloud:
 
 http:
   server_port: 8123
