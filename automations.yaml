@@ -198,9 +198,27 @@
     data:
       title: TV is On
       data:
-        sound: tugboat
-- id: notify_when_printer_is_done_printing
-  alias: Notify when printer is done printing
+        sound: gamelan
+- id: notify_when_doorbell_is_rung
+  alias: Notify when the doorbell is rung
+  trigger:
+    platform: state
+    entity_id: binary_sensor.doorbell_button
+    to: 'on'
+  action:
+    - service: camera.snapshot
+      data:
+        entity_id: camera.front_door
+        filename: /tmp/doorbell
+    - service: notify.notify
+      data:
+        title: Doorbell
+        message: The doorbell has been rung      
+        data:
+          sound: bugle  
+          attachment: /tmp/doorbell
+- id: change_printer_lights_when_printer_is_done_printing
+  alias: Change printer lights when printer is done printing
   trigger:
     platform: state
     entity_id: sensor.octoprint_current_state
