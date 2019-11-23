@@ -6,6 +6,8 @@ homeassistant:
       trusted_networks:
       - !secret local_network
       - !secret vpn_network
+  auth_mfa_modules:
+    - type: totp
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: !secret home_elevation
@@ -27,6 +29,11 @@ cloud:
 http:
   server_port: 8123
   base_url: hassio.local
+  use_x_forwarded_for: true
+  trusted_proxies: 
+    - 192.168.1.2
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
       
 updater:
   include_used_components: true
