@@ -1,7 +1,7 @@
-- platform: mjpeg
-  mjpeg_url: http://gaia.local:8080/?action=stream
-  still_image_url: http://gaia.local:8080/?action=snapshot
-  name: 3dprinter
+- platform: generic
+  still_image_url: !secret 3d_printer_camera_still
+  stream_source: !secret 3d_printer_camera_rtsp
+  name: 3D Printer
 
 - platform: generic
   name: Garage
