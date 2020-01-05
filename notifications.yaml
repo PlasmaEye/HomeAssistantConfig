@@ -3,5 +3,6 @@
   name: home_theater_tv
   
 - platform: pushover
+  name: pushover
   api_key: !secret pushover_api_key
   user_key: !secret pushover_user_key

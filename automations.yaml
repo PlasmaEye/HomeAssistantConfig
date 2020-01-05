@@ -176,7 +176,7 @@
     for:
       hours: 1
   action:
-    service: notify.notify
+    service: notify.pushover
     data_template:
       message: The garage door has been open longer than an hour
     data:
@@ -192,7 +192,7 @@
     for:
       hours: 3
   action:
-    service: notify.notify
+    service: notify.pushover
     data_template:
       message: The TV has been on for longer than 3 hours
     data:
@@ -210,7 +210,7 @@
     data:
       entity_id: camera.front_door
       filename: /tmp/doorbell
-  - service: notify.notify
+  - service: notify.pushover
     data:
       title: Doorbell
       message: The doorbell has been rung
@@ -297,7 +297,7 @@
   - data:
       message: Check if it has lost power or needs reset
       title: Doorbell left the network
-    service: notify.notify
+    service: notify.pushover
 - id: '1577140055130'
   alias: Notify when Hyperion has left the network
   description: ''
@@ -310,4 +310,4 @@
   - data:
       message: The Pi may need rebooted. Nginx is down.
       title: Hyperion has left the network
-    service: notify.notify
+    service: notify.pushover
