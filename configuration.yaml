@@ -71,6 +71,7 @@ unifi:
       site: Default
 
 pi_hole:
+  host: !secret heracles_ip_address
 
 octoprint:
   host: !secret gaia_ip_address
@@ -84,9 +85,16 @@ remote:
     name: Harmony Hub
     host: !secret harmony_hub_ip_address
 
+webostv:
+  host: !secret tv_ip_address 
+  name: Home Theater TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret tv_mac_address
+
 camera: !include cameras.yaml
 switch: !include switches.yaml  
-media_player: !include media_players.yaml
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include_dir_merge_named script
