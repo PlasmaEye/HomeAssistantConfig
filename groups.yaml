@@ -4,7 +4,6 @@ default_view:
   entities:
     - group.weather
     - group.switches
-    - group.all_lights
     - group.garage
 
 media_players:
@@ -22,20 +21,12 @@ media_players:
     - switch.play_switch
     - switch.play_steam_link
 
-automations:
-  view: yes
-  icon: mdi:robot
-  name: Automations
-  entities:
-    - group.all_automations
-
 current_network:
   name: Current Network Status
   view: yes
   icon: mdi:lan
   entities:
     - group.devices
-    - group.all_devices
     - group.internet_status
 
 switches:

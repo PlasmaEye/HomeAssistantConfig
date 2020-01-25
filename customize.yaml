@@ -10,9 +10,6 @@ zwave.kitchen_south:
   friendly_name: Kitchen South
 switch.kitchen_south_switch:
   friendly_name: Kitchen South Switch
-group.all_automations:
-  hidden: false
-  friendly_name: All Automations
 sensor.dark_sky_daily_high_temperature:
   friendly_name: Today's High Temp
 sensor.dark_sky_daily_low_temperature:
@@ -21,15 +18,6 @@ sensor.dark_sky_temperature:
   friendly_name: Current Temp
 sensor.dark_sky_summary:
   friendly_name: Current Conditions
-group.all_devices:
-  hidden: false
-  friendly_name: All Devices
-group.all_lights:
-  hidden: false
-  friendly_name: All Lights
-group.all_switches:
-  hidden: false
-  friendly_name: All Switches
 sensor.living_room_thermostat_humidity:
   friendly_name: Indoor Humidity
 sensor.living_room_thermostat_hvac_state:
