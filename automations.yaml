@@ -176,13 +176,18 @@
     for:
       hours: 1
   action:
-    service: notify.pushover
-    data_template:
-      message: The garage door has been open longer than an hour
-    data:
-      title: Garage Door Open
+    - service: camera.snapshot
       data:
-        sound: gamelan
+        entity_id: camera.garage
+        filename: /tmp/garage
+    - service: notify.pushover
+      data_template:
+        message: The garage door has been open longer than an hour
+      data:
+        title: Garage Door Open
+        data:
+          sound: gamelan
+          attachment: /tmp/garage
 - id: notify_when_tv_has_been_on_for_too_long
   alias: Notify when TV has been on for too long
   trigger:
