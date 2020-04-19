@@ -41,9 +41,6 @@ recorder:
 tts:
   - platform: google_translate
 
-mqtt:
-  broker: core-mosquitto
-
 wake_on_lan:
 
 weather:
