@@ -47,9 +47,6 @@ mqtt:
 wake_on_lan:
 
 weather:
-  - platform: darksky
-    api_key: !secret dark_sky_key
-    units: us
 
 zwave:
   usb_path: /dev/ttyACM0
