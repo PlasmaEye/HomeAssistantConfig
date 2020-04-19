@@ -65,11 +65,6 @@ light:
         mode: "rgbw"
         protocol: "ledenet"
 
-unifi:
-  controllers:
-    - host: unifi
-      site: Default
-
 pi_hole:
   host: !secret heracles_ip_address
 
