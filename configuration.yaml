@@ -47,6 +47,8 @@ mqtt:
 wake_on_lan:
 
 weather:
+  - platform: nws
+    api_key: !secret nws_api_key
 
 zwave:
   usb_path: /dev/ttyACM0
