@@ -4,16 +4,6 @@
   name: 3D Printer
 
 - platform: generic
-  name: Garage
-  still_image_url: !secret garage_camera_still
-  stream_source: !secret garage_camera_rtsp
-
-- platform: generic
-  name: Front Door
-  still_image_url: !secret front_door_camera_still
-  stream_source: !secret front_door_camera_rtsp
-
-- platform: generic
   name: 3D Printer Filament
   still_image_url: !secret 3d_printer_filament_still
   stream_source: !secret 3d_printer_filament_rtsp
