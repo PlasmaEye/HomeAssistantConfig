@@ -176,18 +176,18 @@
     for:
       hours: 1
   action:
-    - service: camera.snapshot
+  - service: camera.snapshot
+    data:
+      entity_id: camera.garage
+      filename: /tmp/garage
+  - service: notify.pushover
+    data_template:
+      message: The garage door has been open longer than an hour
+    data:
+      title: Garage Door Open
       data:
-        entity_id: camera.garage
-        filename: /tmp/garage
-    - service: notify.pushover
-      data_template:
-        message: The garage door has been open longer than an hour
-      data:
-        title: Garage Door Open
-        data:
-          sound: gamelan
-          attachment: /tmp/garage
+        sound: gamelan
+        attachment: /tmp/garage
 - id: notify_when_tv_has_been_on_for_too_long
   alias: Notify when TV has been on for too long
   trigger:
@@ -207,21 +207,26 @@
 - id: notify_when_doorbell_is_rung
   alias: Notify when the doorbell is rung
   trigger:
+  - entity_id: binary_sensor.doorbell_button
     platform: state
-    entity_id: binary_sensor.doorbell_button
     to: 'on'
   action:
-  - service: camera.snapshot
-    data:
+  - data:
       entity_id: camera.front_door
       filename: /tmp/doorbell
-  - service: notify.pushover
-    data:
-      title: Doorbell
-      message: The doorbell has been rung
+    service: camera.snapshot
+  - data:
       data:
-        sound: bugle
         attachment: /tmp/doorbell
+        sound: bugle
+      message: The doorbell has been rung
+      title: Doorbell
+    service: notify.pushover
+  - data:
+      data:
+        attachment: /tmp/doorbell
+      message: The doorbell has been rung
+    service: notify.home_theater_tv
 - id: change_printer_lights_when_printer_is_done_printing
   alias: Change printer lights when printer is done printing
   trigger:
