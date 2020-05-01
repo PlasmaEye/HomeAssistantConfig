@@ -43,10 +43,6 @@ tts:
 
 wake_on_lan:
 
-weather:
-  - platform: nws
-    api_key: !secret nws_api_key
-
 zwave:
   usb_path: /dev/ttyACM0
   device_config: !include zwave_device_config.yaml
@@ -84,9 +80,15 @@ webostv:
     data:
       mac: !secret tv_mac_address
 
+unifiprotect:
+  host: !secret unifi_protect_ip_address
+  username: !secret unifi_protect_username
+  password: !secret unifi_protect_password
+
 camera: !include cameras.yaml
 switch: !include switches.yaml
 automation: !include automations.yaml
 script: !include_dir_merge_named script
 sensor: !include sensors.yaml
+binary_sensor: !include binary_sensors.yaml
 notify: !include notifications.yaml
