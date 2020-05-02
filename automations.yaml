@@ -85,37 +85,37 @@
     value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
       ''Watch a Movie'') }}'
   condition:
-    condition: state
+  - condition: state
     entity_id: light.home_theater_west_dimmer
     state: 'on'
   action:
-    service: light.turn_on
-    entity_id: light.home_theater_west_dimmer
-    data:
-      brightness_pct: 10
+  - data:
+      brightness_pct: 1
       transition: 3
+    entity_id: light.home_theater_west_dimmer
+    service: light.turn_on
 - id: change_light_color_for_watching_tv
   alias: Change light color for watching TV
   trigger:
-    platform: state
-    entity_id: media_player.home_theater_tv
+  - entity_id: media_player.home_theater_tv
     from: 'off'
+    platform: state
   condition:
-    condition: state
+  - condition: state
     entity_id: light.basement_rgbw_controller_main
     state: 'on'
   action:
-  - service: light.turn_off
-    entity_id: light.basement_rgbw_controller_red
-  - service: light.turn_off
-    entity_id: light.basement_rgbw_controller_green
-  - service: light.turn_off
-    entity_id: light.basement_rgbw_controller_blue
-  - service: light.turn_on
-    entity_id: light.basement_rgbw_controller_white
-    data:
+  - entity_id: light.basement_rgbw_controller_red
+    service: light.turn_off
+  - entity_id: light.basement_rgbw_controller_green
+    service: light.turn_off
+  - entity_id: light.basement_rgbw_controller_blue
+    service: light.turn_off
+  - data:
+      brightness_pct: 10
       transition: 5
-      brightness_pct: 30
+    entity_id: light.basement_rgbw_controller_white
+    service: light.turn_on
 - id: brighten_lights_when_done_watching_tv
   alias: Brighten lights when done watching TV
   trigger:
