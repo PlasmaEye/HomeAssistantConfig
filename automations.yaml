@@ -81,16 +81,16 @@
   - platform: template
     value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
       ''Hulu'') }}'
-  - platform: template
-    value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
-      ''Watch a Movie'') }}'
+  - entity_id: sensor.harmony_hub
+    platform: state
+    to: Watch a Movie
   condition:
   - condition: state
     entity_id: light.home_theater_west_dimmer
     state: 'on'
   action:
   - data:
-      brightness_pct: 1
+      brightness_pct: 5
       transition: 3
     entity_id: light.home_theater_west_dimmer
     service: light.turn_on
@@ -191,19 +191,18 @@
 - id: notify_when_tv_has_been_on_for_too_long
   alias: Notify when TV has been on for too long
   trigger:
+  - entity_id: media_player.home_theater_tv
+    for: '3:00:00'
     platform: state
-    entity_id: media_player.home_theater_tv
-    to: playing
-    for:
-      hours: 3
+    to: 'on'
   action:
-    service: notify.pushover
-    data_template:
-      message: The TV has been on for longer than 3 hours
-    data:
-      title: TV is On
+  - data:
       data:
         sound: gamelan
+      title: TV is On
+    data_template:
+      message: The TV has been on for longer than 3 hours
+    service: notify.pushover
 - id: notify_when_doorbell_is_rung
   alias: Notify when the doorbell is rung
   trigger:
@@ -300,7 +299,7 @@
   description: ''
   trigger:
   - entity_id: device_tracker.doorbell
-    from: Home
+    from: home
     platform: state
   condition: []
   action:
@@ -313,11 +312,46 @@
   description: ''
   trigger:
   - entity_id: device_tracker.hyperion
-    from: Home
+    from: home
     platform: state
   condition: []
   action:
   - data:
       message: The Pi may need rebooted. Nginx is down.
       title: Hyperion has left the network
+    service: notify.pushover
+- id: '1588540340794'
+  alias: Set input boolean when home theater is on
+  description: ''
+  trigger:
+  - entity_id: sensor.harmony_hub
+    from: PowerOff
+    platform: state
+  condition: []
+  action:
+  - entity_id: input_boolean.home_theater_on
+    service: input_boolean.turn_on
+- id: '1588540420902'
+  alias: Set input boolean when home theater is off
+  description: ''
+  trigger:
+  - entity_id: sensor.harmony_hub
+    platform: state
+    to: PowerOff
+  condition: []
+  action:
+  - entity_id: input_boolean.home_theater_on
+    service: input_boolean.turn_off
+- id: '1590692559020'
+  alias: Notify when wind is over 20mph
+  description: ''
+  trigger:
+  - above: '20'
+    entity_id: sensor.arwn_wind_speed
+    platform: numeric_state
+  condition: []
+  action:
+  - data_template:
+      message: Wind is gusting over 20mph; currently {{ trigger.to_state.state }}mph
+      title: High winds at home
     service: notify.pushover
