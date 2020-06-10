@@ -355,3 +355,15 @@
       message: Wind is gusting over 20mph; currently {{ trigger.to_state.state }}mph
       title: High winds at home
     service: notify.pushover
+- id: '1591753850917'
+  alias: Notify when the weather station battery is low
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{{ is_state_attr(''sensor.arwn_outside'', ''bat'', 0) }}'
+  condition: []
+  action:
+  - data:
+      message: The weather station battery is low.
+      title: Weather Station Battery
+    service: notify.pushover
