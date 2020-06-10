@@ -2,7 +2,14 @@
   sensors:
     harmony_hub:
       value_template: '{{ states.remote.harmony_hub.attributes.current_activity }}'
-      friendly_name: 'Home Theater'      
+      friendly_name: 'Home Theater'
+
+- platform: template
+  sensors:
+    outdoor_humidity:
+      friendly_name: 'Outdoor Humidity'
+      value_template: "{{ state_attr('sensor.arwn_outside', 'humid') }}"
+      unit_of_measurement: '%'
 
 - platform: template
   sensors:
