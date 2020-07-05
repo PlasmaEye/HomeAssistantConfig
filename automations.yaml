@@ -1,15 +1,13 @@
 - id: outdoor_lights_on_when_dark
   alias: Outdoor Lights On When Dark
   trigger:
-    platform: numeric_state
+  - below: '-4'
     entity_id: sun.sun
+    platform: numeric_state
     value_template: '{{ state.attributes.elevation }}'
-    below: -4.0
   action:
+  - entity_id: switch.front_door_south_switch,switch.garage_sconces_switch
     service: switch.turn_on
-    entity_id:
-    - switch.front_door_south_switch
-    - switch.garage_sconces_switch
 - id: outdoor_lights_on_when_dark_and_cloudy
   alias: Outdoor Lights On When Dark and Cloudy
   trigger:
@@ -27,14 +25,13 @@
     - switch.front_door_south_switch
     - switch.garage_sconces_switch
 - id: porch_light_off_at_11
-  alias: Porch Light Off At 11
+  alias: Porch Lights Off At 11
   trigger:
+  - at: '23:00:00'
     platform: time
-    at: '23:00:00'
   action:
+  - entity_id: switch.front_door_south_switch,switch.back_porch_lights
     service: switch.turn_off
-    entity_id:
-    - switch.front_door_south_switch
 - id: outdoor_lights_off_when_light_and_cloudy
   alias: Outdoor Lights Off When Light and Cloudy
   trigger:
