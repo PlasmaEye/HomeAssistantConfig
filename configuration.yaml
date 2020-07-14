@@ -24,10 +24,9 @@ frontend:
 
 http:
   server_port: 8123
-  base_url: hassio.local
   use_x_forwarded_for: true
   trusted_proxies: 
-    - 192.168.1.2
+    - 192.168.1.100
   ip_ban_enabled: true
   login_attempts_threshold: 5
 
