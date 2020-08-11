@@ -13,6 +13,8 @@
     garage_door_sensor_battery_level:
       value_template: '{{ states.zwave.vision_zg8101_garage_door_detector.attributes.battery_level }}'
       friendly_name: 'Garage Door Sensor Battery Level'
+
+###### Master Bedroom Temp/Humid #####
 - platform: mqtt
   name: "Master Bedroom Temperature"
   state_topic: "rtl_433/15454/temperature_F"
@@ -26,6 +28,8 @@
 - platform: mqtt
   name: "Master Bedroom Battery OK"
   state_topic: "rtl_433/15454/battery_ok"
+
+###### Outdoor 5-in-1 Sensor #####
 - platform: mqtt
   name: "Outside Temperature"
   state_topic: "rtl_433/1309/temperature_F"
@@ -51,3 +55,48 @@
 - platform: mqtt
   name: "Outdoor Battery OK"
   state_topic: "rtl_433/1309/battery_ok"
+
+###### North Bedroom Temp/Humid #####
+- platform: mqtt
+  name: "North Bedroom Temperature"
+  state_topic: "rtl_433/6781/temperature_F"
+  device_class: temperature
+  unit_of_measurement: '°F'
+- platform: mqtt
+  name: "North Bedroom Humidity"
+  state_topic: "rtl_433/6781/humidity"
+  device_class: humidity
+  unit_of_measurement: '%'
+- platform: mqtt
+  name: "North Bedroom Battery OK"
+  state_topic: "rtl_433/6781/battery_ok"
+
+###### West Bedroom Temp/Humid #####
+- platform: mqtt
+  name: "West Bedroom Temperature"
+  state_topic: "rtl_433/6734/temperature_F"
+  device_class: temperature
+  unit_of_measurement: '°F'
+- platform: mqtt
+  name: "West Bedroom Humidity"
+  state_topic: "rtl_433/6734/humidity"
+  device_class: humidity
+  unit_of_measurement: '%'
+- platform: mqtt
+  name: "West Bedroom Battery OK"
+  state_topic: "rtl_433/6734/battery_ok"
+
+###### East Bedroom Temp/Humid #####
+- platform: mqtt
+  name: "East Bedroom Temperature"
+  state_topic: "rtl_433/890/temperature_F"
+  device_class: temperature
+  unit_of_measurement: '°F'
+- platform: mqtt
+  name: "East Bedroom Humidity"
+  state_topic: "rtl_433/890/humidity"
+  device_class: humidity
+  unit_of_measurement: '%'
+- platform: mqtt
+  name: "East Bedroom Battery OK"
+  state_topic: "rtl_433/890/battery_ok"
