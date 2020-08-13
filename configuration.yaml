@@ -58,6 +58,7 @@ light:
 
 pi_hole:
   host: !secret heracles_ip_address
+  api_key: !secret pihole_api_key
 
 octoprint:
   host: !secret gaia_ip_address
