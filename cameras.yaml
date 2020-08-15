@@ -12,5 +12,3 @@
   name: Nursery
   still_image_url: !secret nursery_camera_still
   stream_source: !secret nursery_camera_rtsp
-
-- platform: unifiprotect
