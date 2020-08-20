@@ -42,6 +42,10 @@ tts:
 
 wake_on_lan:
 
+zwave:
+  usb_path: /dev/ttyACM0
+  device_config: !include zwave_device_config.yaml
+
 stream: 
 
 light:
@@ -53,8 +57,8 @@ light:
         protocol: "ledenet"
 
 pi_hole:
-  - host: !secret heracles_ip_address
-    api_key: !secret pihole_api_key
+  host: !secret heracles_ip_address
+  api_key: !secret pihole_api_key
 
 octoprint:
   host: !secret gaia_ip_address
