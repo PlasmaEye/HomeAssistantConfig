@@ -8,22 +8,7 @@
   action:
   - entity_id: switch.front_door_south_switch,switch.garage_sconces_switch
     service: switch.turn_on
-- id: outdoor_lights_on_when_dark_and_cloudy
-  alias: Outdoor Lights On When Dark and Cloudy
-  trigger:
-    platform: numeric_state
-    entity_id: sun.sun
-    value_template: '{{ state.attributes.elevation }}'
-    below: 0
-  condition:
-  - condition: numeric_state
-    entity_id: sensor.dark_sky_cloud_cover
-    above: 80
-  action:
-    service: switch.turn_on
-    entity_id:
-    - switch.front_door_south_switch
-    - switch.garage_sconces_switch
+  mode: single
 - id: porch_light_off_at_11
   alias: Porch Lights Off At 11
   trigger:
@@ -32,6 +17,7 @@
   action:
   - entity_id: switch.front_door_south_switch,switch.back_porch_lights
     service: switch.turn_off
+  mode: single
 - id: outdoor_lights_off_when_light_and_cloudy
   alias: Outdoor Lights Off When Light and Cloudy
   trigger:
@@ -91,8 +77,9 @@
       transition: 3
     entity_id: light.home_theater_west_dimmer
     service: light.turn_on
+  mode: single
 - id: change_light_color_for_watching_tv
-  alias: Change light color for watching TV
+  alias: Dim basement lights for watching TV
   trigger:
   - entity_id: media_player.home_theater_tv
     from: 'off'
@@ -113,11 +100,12 @@
       transition: 5
     entity_id: light.basement_rgbw_controller_white
     service: light.turn_on
+  mode: single
 - id: brighten_lights_when_done_watching_tv
-  alias: Brighten lights when done watching TV
+  alias: Brighten home theater lights when done watching TV
   trigger:
+  - entity_id: media_player.home_theater_tv
     platform: state
-    entity_id: media_player.home_theater_tv
     to: 'off'
   condition:
     condition: state
@@ -226,37 +214,46 @@
 - id: change_printer_lights_when_printer_is_done_printing
   alias: Change printer lights when printer is done printing
   trigger:
+  - entity_id: binary_sensor.octoprint_printing
     platform: state
-    entity_id: sensor.octoprint_current_state
-    from: Printing
+    to: 'off'
   action:
-  - service: light.turn_on
-    entity_id: light.3d_printer_lights
-    data:
+  - data:
       white_value: 0
-  - delay: 00:00:03
-  - service: light.turn_on
     entity_id: light.3d_printer_lights
-    data:
+    service: light.turn_on
+  - delay: 00:00:03
+  - data:
       effect: colorloop
+    entity_id: light.3d_printer_lights
+    service: light.turn_on
+  - delay: 00:10:00
+  - condition: state
+    entity_id: binary_sensor.octoprint_printing
+    state: 'off'
+  - data: {}
+    entity_id: light.3d_printer_lights
+    service: light.turn_off
+  mode: single
 - id: turn_3d_printer_light_to_white_when_printing
   alias: Turn 3D printer light to white when printing
   trigger:
+  - entity_id: binary_sensor.octoprint_printing
     platform: state
-    entity_id: sensor.octoprint_current_state
-    to: Printing
+    to: 'on'
   action:
-  - service: light.turn_on
-    entity_id: light.3d_printer_lights
-    data:
+  - data:
       white_value: 255
-  - service: light.turn_on
     entity_id: light.3d_printer_lights
-    data:
+    service: light.turn_on
+  - data:
       rgb_color:
       - 255
       - 255
       - 255
+    entity_id: light.3d_printer_lights
+    service: light.turn_on
+  mode: single
 - id: turn_garage_interior_lights_on_when_garage_door_opens
   alias: Turn garage interior lights on when garage door opens
   trigger:
@@ -291,6 +288,7 @@
   - data:
       entity_id: switch.garage_interior_lights
     service: switch.turn_on
+  mode: single
 - id: '1577139638962'
   alias: Notify when doorbell leaves the network
   description: ''
@@ -363,9 +361,9 @@
     to: '0'
   condition: []
   action:
-  - data:
-      message: The weather station battery is low.
-      title: Weather Station Battery
+  - data_template:
+      message: Temperature sensor "{{ trigger.to_state.name }}" has a low battery
+      title: Temp Sensor Battery Low
     service: notify.pushover
   mode: single
 - id: '1596808784045'
@@ -376,10 +374,22 @@
     from: '1'
     platform: state
     to: '0'
+  - entity_id: sensor.east_bedroom_battery_ok
+    from: '1'
+    platform: state
+    to: '0'
+  - entity_id: sensor.west_bedroom_battery_ok
+    from: '1'
+    platform: state
+    to: '0'
+  - entity_id: sensor.north_bedroom_battery_ok
+    from: '1'
+    platform: state
+    to: '0'
   condition: []
   action:
   - data:
       message: The master bedroom sensor battery is low.
-      title: Master Bedroom Battery
+      title: Temperature Sensor Battery
     service: notify.pushover
   mode: single
