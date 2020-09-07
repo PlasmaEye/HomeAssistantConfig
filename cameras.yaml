@@ -1,14 +1,11 @@
-- platform: generic
-  still_image_url: !secret 3d_printer_camera_still
-  stream_source: !secret 3d_printer_camera_rtsp
+- platform: ffmpeg
   name: 3D Printer
+  input: !secret 3d_printer_camera_rtsp
 
-- platform: generic
+- platform: ffmpeg
   name: 3D Printer Filament
-  still_image_url: !secret 3d_printer_filament_still
-  stream_source: !secret 3d_printer_filament_rtsp
+  input: !secret 3d_printer_filament_rtsp
 
-- platform: generic
+- platform: ffmpeg
   name: Nursery
-  still_image_url: !secret nursery_camera_still
-  stream_source: !secret nursery_camera_rtsp
+  input: !secret nursery_camera_rtsp
