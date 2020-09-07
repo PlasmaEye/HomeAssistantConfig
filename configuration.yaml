@@ -18,6 +18,8 @@ homeassistant:
     - /tmp
 
 default_config:
+  
+discovery:
 
 frontend:
   themes: !include_dir_merge_named themes
@@ -29,25 +31,7 @@ http:
     - 192.168.1.100
   ip_ban_enabled: true
   login_attempts_threshold: 5
-
-discovery:
-
-recorder:
-  db_url: !secret mariadb_address
-  purge_keep_days: 30
-  purge_interval: 1
-
-tts:
-  - platform: google_translate
-
-wake_on_lan:
-
-zwave:
-  usb_path: !secret zwave_stick_path
-  device_config: !include zwave_device_config.yaml
-
-stream: 
-
+  
 light:
   - platform: flux_led
     devices:
@@ -56,10 +40,6 @@ light:
         mode: "rgbw"
         protocol: "ledenet"
 
-pi_hole:
-  host: !secret heracles_ip_address
-  api_key: !secret pihole_api_key
-
 octoprint:
   host: !secret gaia_ip_address
   api_key: !secret octoprint_api_key
@@ -67,10 +47,31 @@ octoprint:
   bed: true
   number_of_tools: 2
 
+pi_hole:
+  host: !secret heracles_ip_address
+  api_key: !secret pihole_api_key
+
+recorder:
+  db_url: !secret mariadb_address
+  purge_keep_days: 30
+  purge_interval: 1
+
 remote:
   - platform: harmony
     name: Harmony Hub
     host: !secret harmony_hub_ip_address
+
+stream: 
+
+tts:
+  - platform: google_translate
+
+unifiprotect:
+  host: !secret unifi_protect_ip_address
+  username: !secret unifi_protect_username
+  password: !secret unifi_protect_password
+
+wake_on_lan:
 
 webostv:
   host: !secret tv_ip_address 
@@ -80,10 +81,9 @@ webostv:
     data:
       mac: !secret tv_mac_address
 
-unifiprotect:
-  host: !secret unifi_protect_ip_address
-  username: !secret unifi_protect_username
-  password: !secret unifi_protect_password
+zwave:
+  usb_path: !secret zwave_stick_path
+  device_config: !include zwave_device_config.yaml
 
 camera: !include cameras.yaml
 switch: !include switches.yaml
