@@ -6,16 +6,17 @@
     entity_id: media_player.home_theater_tv
     service: media_player.select_source
   - condition: state
-    entity_id: switch.watch_netflix_amazon
+    entity_id: switch.watch_tv
     state: 'off'
   - data: {}
-    entity_id: switch.watch_netflix_amazon
+    entity_id: switch.watch_tv
     service: switch.toggle
   - delay: 00:00:03
   - data:
       source: Netflix
     entity_id: media_player.home_theater_tv
     service: media_player.select_source
+  mode: single
 '1588537276854':
   alias: Turn on Amazon Prime Video
   sequence:
@@ -24,16 +25,17 @@
     entity_id: media_player.home_theater_tv
     service: media_player.select_source
   - condition: state
-    entity_id: switch.watch_netflix_amazon
+    entity_id: switch.watch_tv
     state: 'off'
   - data: {}
-    entity_id: switch.watch_netflix_amazon
+    entity_id: switch.watch_tv
     service: switch.toggle
   - delay: 00:00:03
   - data:
       source: Amazon Prime Video
     entity_id: media_player.home_theater_tv
     service: media_player.select_source
+  mode: single
 '1588537553402':
   alias: Turn on Hulu
   sequence:
@@ -42,16 +44,17 @@
     entity_id: media_player.home_theater_tv
     service: media_player.select_source
   - condition: state
-    entity_id: switch.watch_netflix_amazon
+    entity_id: switch.watch_tv
     state: 'off'
   - data: {}
-    entity_id: switch.watch_netflix_amazon
+    entity_id: switch.watch_tv
     service: switch.toggle
   - delay: 00:00:03
   - data:
       source: Hulu
     entity_id: media_player.home_theater_tv
     service: media_player.select_source
+  mode: single
 '1588538411399':
   alias: Turn on Plex
   sequence:
@@ -60,13 +63,14 @@
     entity_id: media_player.home_theater_tv
     service: media_player.select_source
   - condition: state
-    entity_id: switch.watch_netflix_amazon
+    entity_id: switch.watch_tv
     state: 'off'
   - data: {}
-    entity_id: switch.watch_netflix_amazon
+    entity_id: switch.watch_tv
     service: switch.toggle
   - delay: 00:00:03
   - data:
       source: Plex
     entity_id: media_player.home_theater_tv
     service: media_player.select_source
+  mode: single
