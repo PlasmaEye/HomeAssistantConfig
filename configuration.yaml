@@ -42,6 +42,11 @@ light:
         mode: "rgbw"
         protocol: "ledenet"
 
+logger:
+  default: info
+  logs:
+    pyeconet: debug
+
 octoprint:
   host: !secret gaia_ip_address
   api_key: !secret octoprint_api_key
