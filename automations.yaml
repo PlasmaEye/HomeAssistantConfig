@@ -67,6 +67,9 @@
   - entity_id: sensor.harmony_hub
     platform: state
     to: Watch a Movie
+  - entity_id: media_player.chromecastultra9136
+    from: 'off'
+    platform: state
   condition:
   - condition: state
     entity_id: light.home_theater_west_dimmer
@@ -398,7 +401,7 @@
   description: ''
   trigger:
   - entity_id: media_player.home_theater_tv
-    for: 5s
+    for: 00:00:05
     platform: state
     to: 'off'
   condition:
