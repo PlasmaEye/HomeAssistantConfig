@@ -1,0 +1,25 @@
+- id: '1602446757723'
+  name: Outdoor Lights On
+  entities:
+    switch.garage_sconces_switch:
+      state: 'on'
+    switch.front_door_south_switch:
+      state: 'on'
+  icon: mdi:lightbulb-on
+- id: '1602447007613'
+  name: All Outdoor Lights Off
+  entities:
+    switch.garage_sconces_switch:
+      state: 'off'
+    switch.front_door_south_switch:
+      state: 'off'
+    switch.back_porch_lights:
+      state: 'off'
+- id: '1602451387000'
+  name: House Outdoor Lights Off 
+  entities:
+    switch.front_door_south_switch:
+      state: 'off'
+    switch.back_porch_lights:
+      state: 'off'
+    
