@@ -143,18 +143,26 @@
 - id: turn_off_home_theater_lights_if_basement_lights_turn_off
   alias: Turn off home theater lights if basement lights turn off
   trigger:
-    platform: state
+  - platform: state
     entity_id: light.basement_rgbw_controller_main
     to: 'off'
-    for:
-      seconds: 5
+    for: 0:00:05
   condition:
-    condition: state
-    entity_id: light.home_theater_west_dimmer
-    state: 'on'
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: switch.home_theater_east
+      state: 'on'
+    - condition: state
+      entity_id: light.home_theater_west_dimmer
+      state: 'on'
   action:
-    service: light.turn_off
+  - service: light.turn_off
     entity_id: light.home_theater_west_dimmer
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.home_theater_east
+  mode: single
 - id: notify_when_garage_is_open_for_too_long
   alias: Notify when garage is open for too long
   trigger:
@@ -299,12 +307,14 @@
   - entity_id: device_tracker.doorbell
     from: home
     platform: state
+    for: 00:05:00
   condition: []
   action:
   - data:
       message: Check if it has lost power or needs reset
       title: Doorbell left the network
     service: notify.pushover
+  mode: single
 - id: '1577140055130'
   alias: Notify when Hyperion has left the network
   description: ''
