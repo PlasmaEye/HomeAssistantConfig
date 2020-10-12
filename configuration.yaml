@@ -14,7 +14,7 @@ homeassistant:
   unit_system: imperial
   time_zone: America/Chicago
   customize: !include customize.yaml
-  whitelist_external_dirs:
+  allowlist_external_dirs:
     - /tmp
 
 default_config:
@@ -57,7 +57,6 @@ octoprint:
 recorder:
   db_url: !secret mariadb_address
   purge_keep_days: 30
-  purge_interval: 1
 
 remote:
   - platform: harmony
