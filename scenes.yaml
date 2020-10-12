@@ -42,7 +42,7 @@
   entities:
     light.home_theater_west_dimmer:
       state: 'on'
-      brightness: 100
+      brightness: 255
     light.basement_rgbw_controller_red:
       state: 'off'
     light.basement_rgbw_controller_green:
@@ -51,4 +51,4 @@
       state: 'off'
     light.basement_rgbw_controller_white:
       state: 'on'
-      brightness: 100
+      brightness: 255
