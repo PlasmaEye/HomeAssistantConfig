@@ -6,34 +6,18 @@
     platform: numeric_state
     value_template: '{{ state.attributes.elevation }}'
   action:
-  - entity_id: switch.front_door_south_switch,switch.garage_sconces_switch
-    service: switch.turn_on
+    service: scene.turn_on
+    entity_id: scene.outdoor_lights_on
   mode: single
 - id: porch_light_off_at_11
-  alias: Porch Lights Off At 11
+  alias: House Lights Off At 11
   trigger:
   - at: '23:00:00'
     platform: time
   action:
-  - entity_id: switch.front_door_south_switch,switch.back_porch_lights
-    service: switch.turn_off
+    service: scene.turn_on
+    entity_id: scene.house_outdoor_lights_off    
   mode: single
-- id: outdoor_lights_off_when_light_and_cloudy
-  alias: Outdoor Lights Off When Light and Cloudy
-  trigger:
-    platform: numeric_state
-    entity_id: sun.sun
-    value_template: '{{ state.attributes.elevation }}'
-    above: -4.0
-  condition:
-  - condition: numeric_state
-    entity_id: sensor.dark_sky_cloud_cover
-    below: 80
-  action:
-    service: switch.turn_off
-    entity_id:
-    - switch.front_door_south_switch
-    - switch.garage_sconces_switch
 - id: outdoor_lights_off_when_light
   alias: Outdoor Lights Off When Light
   trigger:
@@ -42,10 +26,8 @@
     value_template: '{{ state.attributes.elevation }}'
     above: 0
   action:
-    service: switch.turn_off
-    entity_id:
-    - switch.front_door_south_switch
-    - switch.garage_sconces_switch
+    service: scene.turn_on
+    entity_id: scene.all_outdoor_lights_off
 - id: dim_theater_lights_for_movies
   alias: Dim theater lights for movies
   trigger:
@@ -87,22 +69,11 @@
   - entity_id: media_player.home_theater_tv
     from: 'off'
     platform: state
-  condition:
-  - condition: state
-    entity_id: light.basement_rgbw_controller_main
-    state: 'on'
   action:
-  - entity_id: light.basement_rgbw_controller_red
-    service: light.turn_off
-  - entity_id: light.basement_rgbw_controller_green
-    service: light.turn_off
-  - entity_id: light.basement_rgbw_controller_blue
-    service: light.turn_off
-  - data:
-      brightness_pct: 10
-      transition: 5
-    entity_id: light.basement_rgbw_controller_white
-    service: light.turn_on
+    service: scene.turn_on
+    data:
+      entity_id: scene.watching_a_movie
+      transition: 3
   mode: single
 - id: brighten_lights_when_done_watching_tv
   alias: Brighten home theater lights when done watching TV
@@ -110,36 +81,11 @@
   - entity_id: media_player.home_theater_tv
     platform: state
     to: 'off'
-  condition:
-    condition: state
-    entity_id: light.home_theater_west_dimmer
-    state: 'on'
   action:
-    service: light.turn_on
-    entity_id: light.home_theater_west_dimmer
+    service: scene.turn_on
     data:
-      brightness_pct: 100
-      transition: 3
-- id: change_light_color_when_done_watching_tv
-  alias: Change light color when done watching TV
-  trigger:
-    platform: state
-    entity_id: media_player.home_theater_tv
-    to: 'off'
-  condition:
-    condition: state
-    entity_id: light.basement_rgbw_controller_main
-    state: 'on'
-  action:
-    service: light.turn_on
-    entity_id: light.basement_rgbw_controller_main
-    data:
-      rgb_color:
-      - 255
-      - 255
-      - 255
-      transition: 5
-      white_value: 255
+      entity_id: scene.done_watching_a_movie
+      transition: 3    
 - id: turn_off_home_theater_lights_if_basement_lights_turn_off
   alias: Turn off home theater lights if basement lights turn off
   trigger:
