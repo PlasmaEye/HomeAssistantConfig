@@ -95,3 +95,4 @@ sensor: !include sensors.yaml
 binary_sensor: !include binary_sensors.yaml
 notify: !include notifications.yaml
 script: !include scripts.yaml
+scene: !include scenes.yaml
