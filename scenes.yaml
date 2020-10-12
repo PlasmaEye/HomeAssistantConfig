@@ -22,4 +22,33 @@
       state: 'off'
     switch.back_porch_lights:
       state: 'off'
-    
+- id: '1602465294000'
+  name: Watching a movie
+  entities:
+    light.home_theater_west_dimmer:
+      state: 'on'
+      brightness: 5
+    light.basement_rgbw_controller_red:
+      state: 'off'
+    light.basement_rgbw_controller_green:
+      state: 'off'
+    light.basement_rgbw_controller_blue:
+      state: 'off'
+    light.basement_rgbw_controller_white:
+      state: 'on'
+      brightness: 10
+- id: '1602467086000'
+  name: Done watching a movie
+  entities:
+    light.home_theater_west_dimmer:
+      state: 'on'
+      brightness: 100
+    light.basement_rgbw_controller_red:
+      state: 'off'
+    light.basement_rgbw_controller_green:
+      state: 'off'
+    light.basement_rgbw_controller_blue:
+      state: 'off'
+    light.basement_rgbw_controller_white:
+      state: 'on'
+      brightness: 100
