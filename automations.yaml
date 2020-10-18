@@ -52,15 +52,11 @@
   - entity_id: media_player.chromecastultra9136
     from: 'off'
     platform: state
-  condition:
-  - condition: state
-    entity_id: light.home_theater_west_dimmer
-    state: 'on'
   action:
     service: scene.turn_on
     data:
       entity_id: scene.watching_a_movie
-      transition: 3
+      transition: 5
   mode: single
 - id: brighten_lights_when_done_watching_tv
   alias: Brighten home theater lights when done watching TV
