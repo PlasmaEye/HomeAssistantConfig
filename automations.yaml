@@ -16,7 +16,7 @@
     platform: time
   action:
     service: scene.turn_on
-    entity_id: scene.house_outdoor_lights_off    
+    entity_id: scene.house_outdoor_lights_off
   mode: single
 - id: outdoor_lights_off_when_light
   alias: Outdoor Lights Off When Light
@@ -57,19 +57,6 @@
     entity_id: light.home_theater_west_dimmer
     state: 'on'
   action:
-  - data:
-      brightness_pct: 5
-      transition: 3
-    entity_id: light.home_theater_west_dimmer
-    service: light.turn_on
-  mode: single
-- id: change_light_color_for_watching_tv
-  alias: Dim basement lights for watching TV
-  trigger:
-  - entity_id: media_player.home_theater_tv
-    from: 'off'
-    platform: state
-  action:
     service: scene.turn_on
     data:
       entity_id: scene.watching_a_movie
@@ -85,7 +72,7 @@
     service: scene.turn_on
     data:
       entity_id: scene.done_watching_a_movie
-      transition: 3    
+      transition: 5
 - id: turn_off_home_theater_lights_if_basement_lights_turn_off
   alias: Turn off home theater lights if basement lights turn off
   trigger:
@@ -145,29 +132,6 @@
     data_template:
       message: The TV has been on for longer than 3 hours
     service: notify.pushover
-- id: notify_when_doorbell_is_rung
-  alias: Notify when the doorbell is rung
-  trigger:
-  - entity_id: binary_sensor.doorbell_button
-    platform: state
-    to: 'on'
-  action:
-  - data:
-      entity_id: camera.front_door
-      filename: /tmp/doorbell
-    service: camera.snapshot
-  - data:
-      data:
-        attachment: /tmp/doorbell
-        sound: bugle
-      message: The doorbell has been rung
-      title: Doorbell
-    service: notify.pushover
-  - data:
-      data:
-        attachment: /tmp/doorbell
-      message: The doorbell has been rung
-    service: notify.home_theater_tv
 - id: change_printer_lights_when_printer_is_done_printing
   alias: Change printer lights when printer is done printing
   trigger:
@@ -245,21 +209,6 @@
   - data:
       entity_id: switch.garage_interior_lights
     service: switch.turn_on
-  mode: single
-- id: '1577139638962'
-  alias: Notify when doorbell leaves the network
-  description: ''
-  trigger:
-  - entity_id: device_tracker.doorbell
-    from: home
-    platform: state
-    for: 00:05:00
-  condition: []
-  action:
-  - data:
-      message: Check if it has lost power or needs reset
-      title: Doorbell left the network
-    service: notify.pushover
   mode: single
 - id: '1577140055130'
   alias: Notify when Hyperion has left the network
@@ -370,4 +319,25 @@
   - data: {}
     entity_id: media_player.chromecastultra9136
     service: media_player.turn_off
+  mode: single
+- id: '1602644611823'
+  alias: High Sensitivity House
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.garage_door
+    from: closed
+  - platform: state
+    entity_id: binary_sensor.motion_garage
+    from: 'off'
+  - platform: state
+    entity_id: binary_sensor.motion_front_door
+    from: 'off'
+  condition: []
+  action:
+  - service: notify.pushover
+    data:
+      message: The {{ trigger.entity_id }} was triggered from {{ trigger.from_state
+        }}
+      title: Stuff is happening at home
   mode: single
