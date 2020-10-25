@@ -16,7 +16,7 @@
     switch.back_porch_lights:
       state: 'off'
 - id: '1602451387000'
-  name: House Outdoor Lights Off 
+  name: House Outdoor Lights Off
   entities:
     switch.front_door_south_switch:
       state: 'off'
@@ -52,3 +52,21 @@
     light.basement_rgbw_controller_white:
       state: 'on'
       brightness: 255
+- id: '1603331402854'
+  name: Basement Lights Off
+  entities:
+    light.home_theater_west_dimmer:
+      node_id: 5
+      value_index: 0
+      value_instance: 1
+      value_id: '72057594126630913'
+      friendly_name: Home Theater Track Lights
+      supported_features: 33
+      state: 'off'
+    switch.home_theater_east:
+      node_id: 23
+      value_index: 0
+      value_instance: 1
+      value_id: '72057594428604416'
+      friendly_name: Home Theater Can Lights
+      state: 'off'

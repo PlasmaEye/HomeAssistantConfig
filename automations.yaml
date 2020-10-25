@@ -52,8 +52,17 @@
   - entity_id: media_player.chromecastultra9136
     from: 'off'
     platform: state
+    to: idle
+  - platform: state
+    entity_id: media_player.chromecastultra9136
+    from: 'off'
+    to: playing
+  - platform: state
+    entity_id: media_player.chromecastultra9136
+    from: 'off'
+    to: paused
   action:
-    service: scene.turn_on
+  - service: scene.turn_on
     data:
       entity_id: scene.watching_a_movie
       transition: 5
@@ -86,11 +95,8 @@
       entity_id: light.home_theater_west_dimmer
       state: 'on'
   action:
-  - service: light.turn_off
-    entity_id: light.home_theater_west_dimmer
-  - service: switch.turn_off
-    data: {}
-    entity_id: switch.home_theater_east
+  - service: scene.turn_on
+    entity_id: scene.basement_lights_off
   mode: single
 - id: notify_when_garage_is_open_for_too_long
   alias: Notify when garage is open for too long
@@ -336,4 +342,143 @@
       message: The {{ trigger.entity_id }} was triggered from {{ trigger.from_state
         }}
       title: Stuff is happening at home
+  mode: single
+- id: '1603659089777'
+  alias: Set input boolean when master bedroom fan is on low
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: fan.master_bedroom_fan
+    attribute: speed
+    to: low
+  - platform: state
+    entity_id: fan.master_bedroom_fan
+    to: 'on'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: fan.master_bedroom_fan
+      state: 'on'
+    - condition: state
+      entity_id: fan.master_bedroom_fan
+      state: low
+      attribute: speed
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    entity_id: input_boolean.master_bedroom_fan_low
+  mode: single
+- id: '1603659119967'
+  alias: Set input boolean when master bedroom fan is not on low
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: fan.master_bedroom_fan
+    attribute: speed
+    from: low
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    entity_id: input_boolean.master_bedroom_fan_low
+  mode: single
+- id: '1603659347125'
+  alias: Set input boolean when master bedroom fan is on medium
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: fan.master_bedroom_fan
+    attribute: speed
+    to: medium
+  - platform: state
+    entity_id: fan.master_bedroom_fan
+    to: 'on'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: fan.master_bedroom_fan
+      state: 'on'
+    - condition: state
+      entity_id: fan.master_bedroom_fan
+      state: medium
+      attribute: speed
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    entity_id: input_boolean.master_bedroom_fan_medium
+  mode: single
+- id: '1603659364091'
+  alias: Set input boolean when master bedroom fan is on high
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: fan.master_bedroom_fan
+    attribute: speed
+    to: high
+  - platform: state
+    entity_id: fan.master_bedroom_fan
+    to: 'on'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: fan.master_bedroom_fan
+      state: 'on'
+    - condition: state
+      entity_id: fan.master_bedroom_fan
+      state: high
+      attribute: speed
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    entity_id: input_boolean.master_bedroom_fan_high
+  mode: single
+- id: '1603659389717'
+  alias: Set input boolean when master bedroom fan is not on medium
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: fan.master_bedroom_fan
+    attribute: speed
+    from: medium
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    entity_id: input_boolean.master_bedroom_fan_medium
+  mode: single
+- id: '1603659409614'
+  alias: Set input boolean when master bedroom fan is not on high
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: fan.master_bedroom_fan
+    attribute: speed
+    from: high
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    entity_id: input_boolean.master_bedroom_fan_high
+  mode: single
+- id: '1603661168830'
+  alias: Set input booleans when master bedroom is off
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: fan.master_bedroom_fan
+    to: 'off'
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    entity_id: input_boolean.master_bedroom_fan_low
+  - service: input_boolean.turn_off
+    data: {}
+    entity_id: input_boolean.master_bedroom_fan_medium
+  - service: input_boolean.turn_off
+    data: {}
+    entity_id: input_boolean.master_bedroom_fan_high
   mode: single
