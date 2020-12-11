@@ -77,82 +77,82 @@
 turn_master_bedroom_fan_to_low:
   alias: Turn master bedroom fan to low
   sequence:
-    - choose:
-      - conditions:
-        - condition: state
-          entity_id: fan.master_bedroom_fan
-          state: 'off'
-        sequence:
-        - service: fan.set_speed
-          data:
-            speed: low
-          entity_id: fan.master_bedroom_fan
-        - service: fan.turn_on
-          data: {}
-          entity_id: fan.master_bedroom_fan
-      - conditions:
-        - condition: state
-          entity_id: fan.master_bedroom_fan
-          state: 'on'
-        sequence:
-        - choose:
-          - conditions:
-            - condition: state
-              entity_id: fan.master_bedroom_fan
-              state: low
-              attribute: speed
-            sequence:
-            - service: fan.turn_off
-              data: {}
-              entity_id: fan.master_bedroom_fan
-          - conditions: []
-            sequence:
-            - service: fan.set_speed
-              data:
-                speed: low
-              entity_id: fan.master_bedroom_fan
-          default: []
-      default: []
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: fan.master_bedroom_fan
+        state: 'off'
+      sequence:
+      - service: fan.set_speed
+        data:
+          speed: low
+        entity_id: fan.master_bedroom_fan
+      - service: fan.turn_on
+        data: {}
+        entity_id: fan.master_bedroom_fan
+    - conditions:
+      - condition: state
+        entity_id: fan.master_bedroom_fan
+        state: 'on'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: fan.master_bedroom_fan
+            state: low
+            attribute: speed
+          sequence:
+          - service: fan.turn_off
+            data: {}
+            entity_id: fan.master_bedroom_fan
+        - conditions: []
+          sequence:
+          - service: fan.set_speed
+            data:
+              speed: low
+            entity_id: fan.master_bedroom_fan
+        default: []
+    default: []
   mode: single
 turn_master_bedroom_to_medium:
   alias: Turn master bedroom fan to medium
   sequence:
-    - choose:
-      - conditions:
-        - condition: state
-          entity_id: fan.master_bedroom_fan
-          state: 'off'
-        sequence:
-        - service: fan.set_speed
-          data:
-            speed: medium
-          entity_id: fan.master_bedroom_fan
-        - service: fan.turn_on
-          data: {}
-          entity_id: fan.master_bedroom_fan
-      - conditions:
-        - condition: state
-          entity_id: fan.master_bedroom_fan
-          state: 'on'
-        sequence:
-        - choose:
-          - conditions:
-            - condition: state
-              entity_id: fan.master_bedroom_fan
-              state: medium
-              attribute: speed
-            sequence:
-            - service: fan.turn_off
-              data: {}
-              entity_id: fan.master_bedroom_fan
-          - conditions: []
-            sequence:
-            - service: fan.set_speed
-              data:
-                speed: medium
-              entity_id: fan.master_bedroom_fan
-          default: []
-      default: []
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: fan.master_bedroom_fan
+        state: 'off'
+      sequence:
+      - service: fan.set_speed
+        data:
+          speed: medium
+        entity_id: fan.master_bedroom_fan
+      - service: fan.turn_on
+        data: {}
+        entity_id: fan.master_bedroom_fan
+    - conditions:
+      - condition: state
+        entity_id: fan.master_bedroom_fan
+        state: 'on'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: fan.master_bedroom_fan
+            state: medium
+            attribute: speed
+          sequence:
+          - service: fan.turn_off
+            data: {}
+            entity_id: fan.master_bedroom_fan
+        - conditions: []
+          sequence:
+          - service: fan.set_speed
+            data:
+              speed: medium
+            entity_id: fan.master_bedroom_fan
+        default: []
+    default: []
   mode: single
 turn_master_bedroom_fan_to_high:
   alias: Turn master bedroom fan to high
@@ -194,3 +194,27 @@ turn_master_bedroom_fan_to_high:
         default: []
     default: []
   mode: single
+set_desk_light_to_at_work:
+  alias: Set desk light to At Work
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_pct: 50
+      rgb_color:
+      - 255
+      - 0
+      - 0
+      effect: At Work
+    entity_id: light.fastled_ws2811_light
+  mode: single
+  icon: mdi:briefcase
+set_desk_light_to_at_home:
+  alias: Set desk light to At Home
+  sequence:
+  - service: light.turn_on
+    data:
+      brightness_pct: 100
+      effect: Random Twinkle
+    entity_id: light.fastled_ws2811_light
+  mode: single
+  icon: mdi:home
