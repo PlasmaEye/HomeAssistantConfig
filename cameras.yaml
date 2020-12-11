@@ -1,10 +1,12 @@
-- platform: ffmpeg
-  name: 3D Printer
-  input: !secret 3d_printer_camera_rtsp
+- platform: mjpeg
+  name: Ouranos
+  still_image_url: !secret ouranos_still_url
+  mjpeg_url: !secret ouranos_stream_url
 
-- platform: ffmpeg
-  name: 3D Printer Filament
-  input: !secret 3d_printer_filament_rtsp
+- platform: mjpeg
+  name: Gaia
+  still_image_url: !secret gaia_still_url
+  mjpeg_url: !secret gaia_stream_url
 
 - platform: ffmpeg
   name: Nursery
