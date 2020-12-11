@@ -21,13 +21,14 @@
 - id: outdoor_lights_off_when_light
   alias: Outdoor Lights Off When Light
   trigger:
-    platform: numeric_state
+  - platform: numeric_state
     entity_id: sun.sun
-    value_template: '{{ state.attributes.elevation }}'
-    above: 0
+    above: '0'
+    attribute: elevation
   action:
-    service: scene.turn_on
+  - service: scene.turn_on
     entity_id: scene.all_outdoor_lights_off
+  mode: single
 - id: dim_theater_lights_for_movies
   alias: Dim theater lights for movies
   trigger:
