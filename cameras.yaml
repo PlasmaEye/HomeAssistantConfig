@@ -11,3 +11,4 @@
 - platform: ffmpeg
   name: Nursery
   input: !secret nursery_camera_rtsp
+  extra_arguments: "-use_wallclock_as_timestamps 1 -async 1 -vsync 1"
