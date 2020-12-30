@@ -15,8 +15,11 @@
   - at: '23:00:00'
     platform: time
   action:
-    service: scene.turn_on
+  - service: scene.turn_on
     entity_id: scene.house_outdoor_lights_off
+  - service: light.turn_off
+    data: {}
+    entity_id: light.wled
   mode: single
 - id: outdoor_lights_off_when_light
   alias: Outdoor Lights Off When Light

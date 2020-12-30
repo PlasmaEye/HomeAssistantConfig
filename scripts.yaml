@@ -197,24 +197,18 @@ turn_master_bedroom_fan_to_high:
 set_desk_light_to_at_work:
   alias: Set desk light to At Work
   sequence:
-  - service: light.turn_on
+  - service: wled.preset
     data:
-      brightness_pct: 50
-      rgb_color:
-      - 255
-      - 0
-      - 0
-      effect: At Work
-    entity_id: light.fastled_ws2811_light
+      preset: 2
+      entity_id: light.wled
   mode: single
   icon: mdi:briefcase
 set_desk_light_to_at_home:
   alias: Set desk light to At Home
   sequence:
-  - service: light.turn_on
+  - service: wled.preset
     data:
-      brightness_pct: 100
-      effect: Random Twinkle
-    entity_id: light.fastled_ws2811_light
+      preset: 1
+      entity_id: light.wled
   mode: single
   icon: mdi:home
