@@ -50,6 +50,9 @@
   - platform: template
     value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
       ''Hulu'') }}'
+  - platform: template
+    value_template: '{{ is_state_attr(''media_player.home_theater_tv'', ''source'',
+      ''Disney+'') }}'
   - entity_id: sensor.harmony_hub
     platform: state
     to: Watch a Movie
