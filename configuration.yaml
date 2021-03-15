@@ -85,10 +85,6 @@ webostv:
     data:
       mac: !secret tv_mac_address
 
-zwave:
-  usb_path: !secret zwave_stick_path
-  device_config: !include zwave_device_config.yaml
-
 camera: !include cameras.yaml
 switch: !include switches.yaml
 automation: !include automations.yaml
