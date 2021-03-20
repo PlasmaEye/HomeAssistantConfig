@@ -1,72 +1,74 @@
 - id: '1602446757723'
   name: Outdoor Lights On
   entities:
-    switch.garage_sconces_switch:
+    switch.garage_sconces:
+      friendly_name: Garage Sconces
+      icon: mdi:outdoor-lamp
       state: 'on'
-    switch.front_door_south_switch:
+    switch.front_door_south:
+      friendly_name: Front Porch Light
+      icon: mdi:coach-lamp
       state: 'on'
   icon: mdi:lightbulb-on
 - id: '1602447007613'
   name: All Outdoor Lights Off
   entities:
-    switch.garage_sconces_switch:
+    switch.garage_sconces:
+      friendly_name: Garage Sconces
+      icon: mdi:outdoor-lamp
       state: 'off'
-    switch.front_door_south_switch:
+    switch.front_door_south:
+      friendly_name: Front Porch Light
+      icon: mdi:coach-lamp
       state: 'off'
-    switch.back_porch_lights:
+    switch.weather_resistant_outdoor:
+      friendly_name: Back Porch Lights
+      icon: mdi:string-lights
       state: 'off'
 - id: '1602451387000'
   name: House Outdoor Lights Off
   entities:
-    switch.front_door_south_switch:
+    switch.front_door_south:
+      friendly_name: Front Porch Light
+      icon: mdi:coach-lamp
       state: 'off'
-    switch.back_porch_lights:
+    switch.weather_resistant_outdoor:
+      friendly_name: Back Porch Lights
+      icon: mdi:string-lights
       state: 'off'
 - id: '1602465294000'
   name: Watching a movie
   entities:
-    light.home_theater_west_dimmer:
+    light.home_theater_west:
+      brightness: 13
+      friendly_name: Home Theater
+      supported_features: 33
       state: 'on'
-      brightness: 5
-    light.basement_rgbw_controller_red:
-      state: 'off'
-    light.basement_rgbw_controller_green:
-      state: 'off'
-    light.basement_rgbw_controller_blue:
-      state: 'off'
-    light.basement_rgbw_controller_white:
+    light.basement_track:
+      brightness: 13
+      friendly_name: Basement Track
+      supported_features: 33
       state: 'on'
-      brightness: 10
 - id: '1602467086000'
   name: Done watching a movie
   entities:
-    light.home_theater_west_dimmer:
-      state: 'on'
+    light.basement_track:
       brightness: 255
-    light.basement_rgbw_controller_red:
-      state: 'off'
-    light.basement_rgbw_controller_green:
-      state: 'off'
-    light.basement_rgbw_controller_blue:
-      state: 'off'
-    light.basement_rgbw_controller_white:
+      friendly_name: Basement Track
+      supported_features: 33
       state: 'on'
+    light.home_theater_west:
       brightness: 255
+      friendly_name: Home Theater
+      supported_features: 33
+      state: 'on'
 - id: '1603331402854'
   name: Basement Lights Off
   entities:
-    light.home_theater_west_dimmer:
-      node_id: 5
-      value_index: 0
-      value_instance: 1
-      value_id: '72057594126630913'
-      friendly_name: Home Theater Track Lights
-      supported_features: 33
-      state: 'off'
     switch.home_theater_east:
-      node_id: 23
-      value_index: 0
-      value_instance: 1
-      value_id: '72057594428604416'
-      friendly_name: Home Theater Can Lights
+      friendly_name: Can Lights
+      state: 'off'
+    light.home_theater_west:
+      friendly_name: Home Theater
+      supported_features: 33
       state: 'off'

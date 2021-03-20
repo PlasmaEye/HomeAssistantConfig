@@ -81,15 +81,17 @@
     platform: state
     to: 'off'
   action:
-    service: scene.turn_on
+  - service: scene.turn_on
     data:
-      entity_id: scene.done_watching_a_movie
       transition: 5
+    target:
+      entity_id: scene.done_watching_a_movie
+  mode: single
 - id: turn_off_home_theater_lights_if_basement_lights_turn_off
   alias: Turn off home theater lights if basement lights turn off
   trigger:
   - platform: state
-    entity_id: light.basement_rgbw_controller_main
+    entity_id: light.basement_track
     to: 'off'
     for: 0:00:05
   condition:
@@ -99,7 +101,7 @@
       entity_id: switch.home_theater_east
       state: 'on'
     - condition: state
-      entity_id: light.home_theater_west_dimmer
+      entity_id: light.home_theater_west
       state: 'on'
   action:
   - service: scene.turn_on
@@ -108,11 +110,10 @@
 - id: notify_when_garage_is_open_for_too_long
   alias: Notify when garage is open for too long
   trigger:
-    platform: state
-    entity_id: sensor.garage_door
-    to: Open
-    for:
-      hours: 1
+  - platform: state
+    entity_id: binary_sensor.garage_door_open
+    to: 'On'
+    for: '1:00:00'
   action:
   - service: camera.snapshot
     data:
@@ -126,6 +127,7 @@
       data:
         sound: gamelan
         attachment: /tmp/garage
+  mode: single
 - id: notify_when_tv_has_been_on_for_too_long
   alias: Notify when TV has been on for too long
   trigger:
@@ -187,24 +189,30 @@
 - id: turn_garage_interior_lights_on_when_garage_door_opens
   alias: Turn garage interior lights on when garage door opens
   trigger:
-  - entity_id: sensor.garage_door
+  - entity_id: binary_sensor.garage_door_open
     platform: state
-    to: Open
+    to: 'On'
   condition:
   - condition: template
     value_template: '{{ states.sun.sun.attributes.elevation < 0 }}'
   action:
   - service: switch.turn_on
-    entity_id: switch.garage_interior_lights
+    data: {}
+    target:
+      entity_id: switch.garage_interior
+  mode: single
 - id: turn_garage_interior_lights_off_when_garage_door_closes
   alias: Turn garage interior lights off when garage door closes
   trigger:
-  - entity_id: sensor.garage_door
+  - entity_id: binary_sensor.garage_door_open
     platform: state
-    to: Closed
+    to: 'Off'
   action:
-    service: switch.turn_off
-    entity_id: switch.garage_interior_lights
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.garage_interior
+  mode: single
 - id: '1566659647483'
   alias: Turn garage interior lights on if door open and sunset
   trigger:
@@ -212,12 +220,13 @@
     platform: sun
   condition:
   - condition: state
-    entity_id: sensor.garage_door
-    state: Open
+    entity_id: binary_sensor.garage_door_open
+    state: 'On'
   action:
-  - data:
-      entity_id: switch.garage_interior_lights
+  - data: {}
     service: switch.turn_on
+    target:
+      entity_id: switch.garage_interior
   mode: single
 - id: '1577140055130'
   alias: Notify when Hyperion has left the network
