@@ -1,6 +1,6 @@
 - platform: flux
   lights:
-    - light.under_cabinet_light_controller_main
+    - light.under_cabinet
   mode: rgb
   start_colortemp: 15000
   disable_brightness_adjust: true
