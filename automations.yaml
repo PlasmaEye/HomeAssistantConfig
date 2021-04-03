@@ -112,13 +112,14 @@
   trigger:
   - platform: state
     entity_id: binary_sensor.garage_door_open
-    to: 'On'
+    to: 'on'
     for: '1:00:00'
   action:
   - service: camera.snapshot
     data:
-      entity_id: camera.garage
       filename: /tmp/garage
+    target:
+      entity_id: camera.garage_2
   - service: notify.pushover
     data_template:
       message: The garage door has been open longer than an hour
@@ -191,10 +192,10 @@
   trigger:
   - entity_id: binary_sensor.garage_door_open
     platform: state
-    to: 'On'
+    to: 'on'
   condition:
-  - condition: template
-    value_template: '{{ states.sun.sun.attributes.elevation < 0 }}'
+  - condition: sun
+    after: sunset
   action:
   - service: switch.turn_on
     data: {}
@@ -206,7 +207,7 @@
   trigger:
   - entity_id: binary_sensor.garage_door_open
     platform: state
-    to: 'Off'
+    to: 'off'
   action:
   - service: switch.turn_off
     data: {}
@@ -221,7 +222,7 @@
   condition:
   - condition: state
     entity_id: binary_sensor.garage_door_open
-    state: 'On'
+    state: 'on'
   action:
   - data: {}
     service: switch.turn_on
@@ -358,4 +359,58 @@
       message: The {{ trigger.entity_id }} was triggered from {{ trigger.from_state
         }}
       title: Stuff is happening at home
+  mode: single
+- id: '1617384805887'
+  alias: Work Desk
+  description: ''
+  trigger:
+  - platform: time_pattern
+    hours: '8'
+    minutes: '0'
+    seconds: '0'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - service: script.set_desk_light_to_at_work
+  mode: single
+- id: '1617385425384'
+  alias: Weekday Fun Desk
+  description: ''
+  trigger:
+  - platform: time_pattern
+    hours: '17'
+    minutes: '0'
+    seconds: '0'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+  - service: script.set_desk_light_to_at_home
+  mode: single
+- id: '1617385468858'
+  alias: Weekend Fun Desk
+  description: ''
+  trigger:
+  - platform: time_pattern
+    hours: '8'
+    minutes: '0'
+    seconds: '0'
+  condition:
+  - condition: time
+    weekday:
+    - sat
+    - sun
+  action:
+  - service: script.set_desk_light_to_at_home
   mode: single
