@@ -3,16 +3,6 @@
     harmony_hub:
       value_template: '{{ states.remote.home_theater.attributes.current_activity }}'
       friendly_name: 'Home Theater'
-    sun_elevation:
-      friendly_name: 'Sun Elevation'
-      value_template: "{{ state_attr('sun.sun', 'elevation') }}"
-      unit_of_measurement: '°'
-    garage_door:
-      value_template: "{% if states.binary_sensor.vision_zg8101_garage_door_detector_sensor.state == 'on' %}Open{% elif states.sensor.vision_zg8101_garage_door_detector_alarm_level.state == '255' %}Open{% else %}Closed{% endif %}"
-      friendly_name: 'Garage Door Sensor'
-    garage_door_sensor_battery_level:
-      value_template: '{{ states.zwave.vision_zg8101_garage_door_detector.attributes.battery_level }}'
-      friendly_name: 'Garage Door Sensor Battery Level'
 
 ###### Master Bedroom Temp/Humid #####
 - platform: mqtt
