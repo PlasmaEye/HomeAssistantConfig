@@ -19,32 +19,48 @@
   name: "Master Bedroom Battery OK"
   state_topic: "rtl_433/15454/battery_ok"
 
-###### Outdoor 5-in-1 Sensor #####
+###### Outdoor All-in-one Sensor #####
 - platform: mqtt
   name: "Outside Temperature"
-  state_topic: "rtl_433/1309/temperature_F"
+  state_topic: "rtl_433/173/temperature_F"
+  value_template: "{{ value|float|round(1) }}"
   device_class: temperature
   unit_of_measurement: '°F'
 - platform: mqtt
   name: "Outside Humidity"
-  state_topic: "rtl_433/1309/humidity"
+  state_topic: "rtl_433/173/humidity"
   device_class: humidity
   unit_of_measurement: '%'
 - platform: mqtt
   name: "Total Rainfall"
-  state_topic: "rtl_433/1309/rain_in"
+  state_topic: "rtl_433/173/rain_in"
   unit_of_measurement: 'in'
+  value_template: "{{ value|float|round(2) }}"
 - platform: mqtt
   name: "Outside Wind Speed"
-  state_topic: "rtl_433/1309/wind_avg_mi_h"
+  state_topic: "rtl_433/173/wind_avg_m_s"
   unit_of_measurement: 'mph'  
+  value_template: "{{ value|float|round(1) }}"
+- platform: mqtt
+  name: "Outside Wind Gust"
+  state_topic: "rtl_433/173/wind_max_m_s"
+  unit_of_measurement: 'mph'  
+  value_template: "{{ value|float|round(1) }}"
 - platform: mqtt
   name: "Outside Wind Direction"
-  state_topic: "rtl_433/1309/wind_dir_deg"
+  state_topic: "rtl_433/173/wind_dir_deg"
   unit_of_measurement: '°'
 - platform: mqtt
+  name: "Outside Light"
+  state_topic: "rtl_433/173/light_lux"
+  unit_of_measurement: 'lx'
+  device_class: illuminance
+- platform: mqtt
+  name: "Outside UV Index"
+  state_topic: "rtl_433/173/uvi"
+- platform: mqtt
   name: "Outdoor Battery OK"
-  state_topic: "rtl_433/1309/battery_ok"
+  state_topic: "rtl_433/173/battery_ok"
 
 ###### North Bedroom Temp/Humid #####
 - platform: mqtt
@@ -109,6 +125,11 @@
 ###### Electricity Meter #####
 - platform: mqtt
   name: "Electricity Consumption"
-  state_topic: "rtl_433/64633980/consumption_data"
+  state_topic: !secret electricity_meter_topic
   device_class: energy
   unit_of_measurement: 'kWh'
+
+###### Electricity Meter #####
+- platform: mqtt
+  name: "Gas Consumption"
+  state_topic: !secret gas_meter_topic
