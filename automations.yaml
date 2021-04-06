@@ -274,7 +274,7 @@
   condition:
   - condition: template
     value_template: '{{(states(''sensor.outside_wind_gust'')|float) - (states(''sensor.outside_wind_speed'')|float)
-      > 15}}'
+      > 10}}'
   action:
   - data_template:
       message: Wind is gusting; currently {{ trigger.to_state.state }}mph
