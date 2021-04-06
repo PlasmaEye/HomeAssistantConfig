@@ -265,16 +265,19 @@
   - entity_id: input_boolean.home_theater_on
     service: input_boolean.turn_off
 - id: '1590692559020'
-  alias: Notify when wind is over 20mph
+  alias: Notify when wind is gusting
   description: ''
   trigger:
   - above: '20'
-    entity_id: sensor.outside_wind_speed
+    entity_id: sensor.outside_wind_gust
     platform: numeric_state
-  condition: []
+  condition:
+  - condition: template
+    value_template: '{{(states(''sensor.outside_wind_gust'')|float) - (states(''sensor.outside_wind_speed'')|float)
+      > 15}}'
   action:
   - data_template:
-      message: Wind is gusting over 20mph; currently {{ trigger.to_state.state }}mph
+      message: Wind is gusting; currently {{ trigger.to_state.state }}mph
       title: High winds at home
     service: notify.pushover
   mode: single
