@@ -133,3 +133,4 @@
 - platform: mqtt
   name: "Gas Consumption"
   state_topic: !secret gas_meter_topic
+  unit_of_measurement: 'ft³'
