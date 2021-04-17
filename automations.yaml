@@ -1,12 +1,12 @@
 - id: outdoor_lights_on_when_dark
   alias: Outdoor Lights On When Dark
   trigger:
-  - below: '-4'
-    entity_id: sun.sun
+  - entity_id: sensor.outside_light
     platform: numeric_state
-    value_template: '{{ state.attributes.elevation }}'
+    for: 00:01:00
+    below: '25'
   action:
-    service: scene.turn_on
+  - service: scene.turn_on
     entity_id: scene.outdoor_lights_on
   mode: single
 - id: porch_light_off_at_11
@@ -25,9 +25,8 @@
   alias: Outdoor Lights Off When Light
   trigger:
   - platform: numeric_state
-    entity_id: sun.sun
-    above: '0'
-    attribute: elevation
+    entity_id: sensor.outside_light
+    above: '50'
   action:
   - service: scene.turn_on
     entity_id: scene.all_outdoor_lights_off
@@ -416,4 +415,25 @@
     - sun
   action:
   - service: script.set_desk_light_to_at_home
+  mode: single
+- id: '1618003272208'
+  alias: Doorbell Rung
+  description: Notify when doorbell is rung
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.doorbell_doorbell
+    to: 'on'
+  condition: []
+  action:
+  - service: camera.snapshot
+    target:
+      entity_id: camera.doorbell_2
+    data:
+      filename: /tmp/doorbell
+  - service: notify.pushover
+    data:
+      message: Someone is at the door
+      title: Doorbell
+      data:
+        attachment: /tmp/doorbell
   mode: single
