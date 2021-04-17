@@ -59,6 +59,9 @@
   name: "Outside UV Index"
   state_topic: "rtl_433/173/uvi"
 - platform: mqtt
+  name: "Outside UV"
+  state_topic: "rtl_433/173/uv"
+- platform: mqtt
   name: "Outdoor Battery OK"
   state_topic: "rtl_433/173/battery_ok"
 
