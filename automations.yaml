@@ -264,16 +264,13 @@
   - entity_id: input_boolean.home_theater_on
     service: input_boolean.turn_off
 - id: '1590692559020'
-  alias: Notify when wind is gusting
+  alias: Wind Gust
   description: ''
   trigger:
   - above: '20'
     entity_id: sensor.outside_wind_gust
     platform: numeric_state
-  condition:
-  - condition: template
-    value_template: '{{(states(''sensor.outside_wind_gust'')|float) - (states(''sensor.outside_wind_speed'')|float)
-      > 10}}'
+  condition: []
   action:
   - data_template:
       message: Wind is gusting; currently {{ trigger.to_state.state }}mph
