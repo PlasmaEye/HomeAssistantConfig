@@ -61,6 +61,9 @@ octoprint:
     bed: true
     number_of_tools: 2
 
+zoneminder:
+  - host: !secret zoneminder_address
+
 recorder:
   db_url: !secret mariadb_address
   purge_keep_days: 30
