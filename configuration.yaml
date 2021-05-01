@@ -44,8 +44,6 @@ light:
 
 logger:
   default: info
-  logs:
-    pyeconet: debug
 
 octoprint:
   - host: !secret gaia_ip_address
@@ -63,6 +61,8 @@ octoprint:
 
 zoneminder:
   - host: !secret zoneminder_address
+    ssl: true
+    verify_ssl: false
 
 recorder:
   db_url: !secret mariadb_address
