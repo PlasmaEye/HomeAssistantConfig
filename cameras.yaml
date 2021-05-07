@@ -8,7 +8,4 @@
   still_image_url: !secret gaia_still_url
   mjpeg_url: !secret gaia_stream_url
 
-- platform: ffmpeg
-  name: Nursery
-  input: !secret nursery_camera_rtsp
-  extra_arguments: -use_wallclock_as_timestamps 1 -pred 1 -q:v 2
+- platform: zoneminder
