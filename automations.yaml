@@ -434,3 +434,31 @@
       data:
         attachment: /tmp/doorbell
   mode: single
+- id: '1620849253039'
+  alias: Master Bedroom Fan On
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.master_bedroom_temperature
+    above: '72'
+  condition: []
+  action:
+  - service: fan.turn_on
+    data:
+      percentage: 33
+    target:
+      entity_id: fan.master_bedroom
+  mode: single
+- id: '1620968380218'
+  alias: Master Bedroom Fan Off
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.master_bedroom_temperature
+    below: '70'
+  condition: []
+  action:
+  - service: fan.turn_off
+    target:
+      entity_id: fan.master_bedroom
+  mode: single
