@@ -4,6 +4,9 @@
   mode: rgb
   start_colortemp: 15000
   disable_brightness_adjust: true
+- platform: wake_on_lan
+  mac: !secret prometheus_mac_address
+  host: !secret prometheus_ip_address
 - platform: template
   switches:
     watch_netflix_amazon:
