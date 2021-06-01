@@ -473,4 +473,6 @@
   - service: fan.set_percentage
     data:
       percentage: 66
+    target:
+      entity_id: fan.master_bedroom
   mode: single
