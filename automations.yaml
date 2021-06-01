@@ -343,20 +343,13 @@
   description: ''
   trigger:
   - platform: state
-    entity_id: sensor.garage_door
-    from: closed
-  - platform: state
-    entity_id: binary_sensor.motion_garage
-    from: 'off'
-  - platform: state
-    entity_id: binary_sensor.motion_front_door
-    from: 'off'
+    entity_id: binary_sensor.garage_door_open
   condition: []
   action:
   - service: notify.pushover
     data:
-      message: The {{ trigger.entity_id }} was triggered from {{ trigger.from_state
-        }}
+      message: The {{ trigger.from_state.name }} was triggered from {{ trigger.from_state.state
+        }} to {{trigger.to_state.state}}
       title: Stuff is happening at home
   mode: single
 - id: '1617384805887'
@@ -426,13 +419,19 @@
     target:
       entity_id: camera.doorbell_2
     data:
-      filename: /tmp/doorbell
+      filename: /tmp/doorbell.png
   - service: notify.pushover
     data:
       message: Someone is at the door
       title: Doorbell
       data:
-        attachment: /tmp/doorbell
+        attachment: /tmp/doorbell.png
+  - service: notify.home_theater_tv
+    data:
+      message: The doorbell has been rung
+      data:
+        data:
+          icon: /tmp/doorbell.png
   mode: single
 - id: '1620849253039'
   alias: Master Bedroom Fan On
@@ -455,10 +454,23 @@
   trigger:
   - platform: numeric_state
     entity_id: sensor.master_bedroom_temperature
-    below: '70'
+    below: '71'
   condition: []
   action:
   - service: fan.turn_off
     target:
       entity_id: fan.master_bedroom
+  mode: single
+- id: '1622557843299'
+  alias: Master Bedroom Fan Faster
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.master_bedroom_temperature
+    above: '74'
+  condition: []
+  action:
+  - service: fan.set_percentage
+    data:
+      percentage: 66
   mode: single
