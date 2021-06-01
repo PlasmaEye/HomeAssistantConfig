@@ -36,6 +36,9 @@
       friendly_name: Back Porch Lights
       icon: mdi:string-lights
       state: 'off'
+    switch.workshop:
+      friendly_name: Workshop
+      state: 'off'
 - id: '1602465294000'
   name: Watching a movie
   entities:
