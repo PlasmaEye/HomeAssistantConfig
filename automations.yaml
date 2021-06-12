@@ -344,6 +344,12 @@
   trigger:
   - platform: state
     entity_id: binary_sensor.garage_door_open
+  - platform: state
+    entity_id: binary_sensor.workshop_door_is_open
+  - platform: state
+    entity_id: binary_sensor.back_door_is_open
+  - platform: state
+    entity_id: binary_sensor.front_door_is_open
   condition: []
   action:
   - service: notify.pushover
@@ -440,13 +446,26 @@
   - platform: numeric_state
     entity_id: sensor.master_bedroom_temperature
     above: '72'
+    below: '74'
   condition: []
   action:
-  - service: fan.turn_on
-    data:
-      percentage: 33
-    target:
-      entity_id: fan.master_bedroom
+  - choose:
+    - conditions:
+      - condition: numeric_state
+        entity_id: sensor.master_bedroom_temperature
+        above: '73'
+      sequence:
+      - service: fan.set_percentage
+        target:
+          entity_id: fan.master_bedroom
+        data:
+          percentage: 33
+    default:
+    - service: fan.turn_on
+      target:
+        entity_id: fan.master_bedroom
+      data:
+        percentage: 33
   mode: single
 - id: '1620968380218'
   alias: Master Bedroom Fan Off
@@ -475,4 +494,55 @@
       percentage: 66
     target:
       entity_id: fan.master_bedroom
+  mode: single
+- id: '1622911261696'
+  alias: Sun notification
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: '180'
+  condition: []
+  action:
+  - service: notify.mobile_app_oneplus_7t
+    data:
+      title: Sun is in the south
+      message: Uncover east windows
+  mode: single
+- id: '1623283741641'
+  alias: Workshop door
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.workshop_door_is_open
+    to: 'on'
+  condition: []
+  action:
+  - service: switch.turn_on
+    target:
+      entity_id: switch.workshop
+  mode: single
+- id: '1623462419600'
+  alias: Nightly Door Check
+  description: ''
+  trigger:
+  - platform: time
+    at: '22:00'
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workshop_door_is_open
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.back_door_is_open
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.front_door_is_open
+      state: 'on'
+  action:
+  - service: notify.mobile_app_oneplus_7t
+    data:
+      message: Some doors are opens
   mode: single
