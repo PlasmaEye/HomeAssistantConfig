@@ -7,5 +7,3 @@
   name: Gaia
   still_image_url: !secret gaia_still_url
   mjpeg_url: !secret gaia_stream_url
-
-- platform: zoneminder
