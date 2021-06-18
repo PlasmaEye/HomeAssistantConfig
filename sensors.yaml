@@ -4,8 +4,6 @@
       value_template: '{{ states.remote.home_theater.attributes.current_activity }}'
       friendly_name: 'Home Theater'
 
-- platform: zoneminder
-
 ###### Master Bedroom Temp/Humid #####
 - platform: mqtt
   name: "Master Bedroom Temperature"
