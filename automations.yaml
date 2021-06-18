@@ -495,21 +495,6 @@
     target:
       entity_id: fan.master_bedroom
   mode: single
-- id: '1622911261696'
-  alias: Sun notification
-  description: ''
-  trigger:
-  - platform: numeric_state
-    entity_id: sun.sun
-    attribute: azimuth
-    above: '180'
-  condition: []
-  action:
-  - service: notify.mobile_app_oneplus_7t
-    data:
-      title: Sun is in the south
-      message: Uncover east windows
-  mode: single
 - id: '1623283741641'
   alias: Workshop door
   description: ''
@@ -544,5 +529,45 @@
   action:
   - service: notify.mobile_app_oneplus_7t
     data:
-      message: Some doors are opens
+      message: '{% if is_state(''binary_sensor.front_door_is_open'', ''on'') %}Front
+        Door is open {% endif %} {% if is_state(''binary_sensor.back_door_is_open'',
+        ''on'') %}Back Door is open {% endif %} {% if is_state(''binary_sensor.workshop_door_is_open'',
+        ''on'') %}Workshop Door is open{% endif %}
+
+        '
+  mode: single
+- id: '1623499053260'
+  alias: Door's Open
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.back_door_is_open
+    to: 'on'
+    for: 00:00:30
+  condition: []
+  action:
+  - service: notify.pushover
+    data:
+      message: Back door is open
+  - wait_for_trigger:
+    - platform: state
+      entity_id: binary_sensor.back_door_is_open
+      to: 'off'
+    timeout: 00:00:30
+  - service: notify.pushover
+    data:
+      message: '{% if is_state(''binary_sensor.back_door_is_open'', ''on'') %}Back
+        door still isn''t closed!{% else %}Back door has been closed{% endif %}'
+  mode: single
+- id: '1623512969464'
+  alias: Back Door Tag is scanned
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: 501d0321-7af5-4499-ab72-0829c9ed0e5a
+  condition: []
+  action:
+  - service: switch.toggle
+    target:
+      entity_id: switch.garage_door_opener
   mode: single
