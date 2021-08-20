@@ -4,7 +4,7 @@
   - entity_id: sensor.outside_light
     platform: numeric_state
     for: 00:01:00
-    below: '25'
+    below: '10'
   action:
   - service: scene.turn_on
     entity_id: scene.outdoor_lights_on
@@ -26,7 +26,7 @@
   trigger:
   - platform: numeric_state
     entity_id: sensor.outside_light
-    above: '50'
+    above: '25'
   action:
   - service: scene.turn_on
     entity_id: scene.all_outdoor_lights_off
@@ -55,18 +55,18 @@
   - entity_id: sensor.harmony_hub
     platform: state
     to: Watch a Movie
-  - entity_id: media_player.chromecastultra9136
-    from: 'off'
+  - from: 'off'
     platform: state
     to: idle
+    entity_id: media_player.basement_chromecast
   - platform: state
-    entity_id: media_player.chromecastultra9136
     from: 'off'
     to: playing
+    entity_id: media_player.basement_chromecast
   - platform: state
-    entity_id: media_player.chromecastultra9136
     from: 'off'
     to: paused
+    entity_id: media_player.basement_chromecast
   action:
   - service: scene.turn_on
     data:
@@ -79,6 +79,10 @@
   - entity_id: media_player.home_theater_tv
     platform: state
     to: 'off'
+  condition:
+  - condition: state
+    state: 'on'
+    entity_id: light.home_theater_west
   action:
   - service: scene.turn_on
     data:
@@ -107,7 +111,8 @@
     entity_id: scene.basement_lights_off
   mode: single
 - id: notify_when_garage_is_open_for_too_long
-  alias: Notify when garage is open for too long
+  alias: Garage Door Open
+  description: Notify when garage is open for too long
   trigger:
   - platform: state
     entity_id: binary_sensor.garage_door_open
@@ -116,7 +121,7 @@
   action:
   - service: camera.snapshot
     data:
-      filename: /tmp/garage
+      filename: /tmp/garage.png
     target:
       entity_id: camera.garage_2
   - service: notify.pushover
@@ -126,7 +131,7 @@
       title: Garage Door Open
       data:
         sound: gamelan
-        attachment: /tmp/garage
+        attachment: /tmp/garage.png
   mode: single
 - id: notify_when_tv_has_been_on_for_too_long
   alias: Notify when TV has been on for too long
@@ -416,9 +421,8 @@
   alias: Doorbell Rung
   description: Notify when doorbell is rung
   trigger:
-  - platform: state
-    entity_id: binary_sensor.doorbell_doorbell
-    to: 'on'
+  - platform: event
+    event_type: unifiprotect_doorbell
   condition: []
   action:
   - service: camera.snapshot
@@ -438,7 +442,13 @@
       data:
         data:
           icon: /tmp/doorbell.png
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 20
+      milliseconds: 0
   mode: single
+  max_exceeded: silent
 - id: '1620849253039'
   alias: Master Bedroom Fan On
   description: ''
@@ -487,7 +497,10 @@
   - platform: numeric_state
     entity_id: sensor.master_bedroom_temperature
     above: '74'
-  condition: []
+  condition:
+  - condition: state
+    entity_id: fan.master_bedroom
+    state: 'on'
   action:
   - service: fan.set_percentage
     data:
@@ -496,13 +509,16 @@
       entity_id: fan.master_bedroom
   mode: single
 - id: '1623283741641'
-  alias: Workshop door
+  alias: Workshop door open
   description: ''
   trigger:
   - platform: state
     entity_id: binary_sensor.workshop_door_is_open
     to: 'on'
-  condition: []
+  condition:
+  - condition: state
+    entity_id: binary_sensor.garage_door_open
+    state: 'off'
   action:
   - service: switch.turn_on
     target:
@@ -537,27 +553,25 @@
         '
   mode: single
 - id: '1623499053260'
-  alias: Door's Open
+  alias: Back Door Open
   description: ''
   trigger:
   - platform: state
     entity_id: binary_sensor.back_door_is_open
     to: 'on'
-    for: 00:00:30
+    for: 00:01:00
   condition: []
   action:
+  - service: camera.snapshot
+    target:
+      entity_id: camera.garage_2
+    data:
+      filename: /tmp/garage.png
   - service: notify.pushover
     data:
-      message: Back door is open
-  - wait_for_trigger:
-    - platform: state
-      entity_id: binary_sensor.back_door_is_open
-      to: 'off'
-    timeout: 00:00:30
-  - service: notify.pushover
-    data:
-      message: '{% if is_state(''binary_sensor.back_door_is_open'', ''on'') %}Back
-        door still isn''t closed!{% else %}Back door has been closed{% endif %}'
+      message: The back door has been open for a minute
+      data:
+        attachment: /tmp/garage.png
   mode: single
 - id: '1623512969464'
   alias: Back Door Tag is scanned
@@ -570,4 +584,20 @@
   - service: switch.toggle
     target:
       entity_id: switch.garage_door_opener
+  mode: single
+- id: '1624405097431'
+  alias: Workshop door closed
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.workshop_door_is_open
+    to: 'off'
+  condition:
+  - condition: state
+    state: 'on'
+    entity_id: switch.workshop
+  action:
+  - service: switch.turn_off
+    target:
+      entity_id: switch.workshop
   mode: single
